@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2016-07-12
+  time: 2016-07-12 14:26:34
+  description: MyText
+  location_id: 1
+  host_id: 1
+
+two:
+  date: 2016-07-12
+  time: 2016-07-12 14:26:34
+  description: MyText
+  location_id: 1
+  host_id: 1
