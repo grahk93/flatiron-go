@@ -1,0 +1,21 @@
+TO DO  (6/13/16 2:00pm)
+location and cohort (together)
+validations (together)
+tests (be able to write one by the end of the day)
+  and setup 
+
+
+
+
+-tests 
+-validations
+-fields to drop 
+-Website nav
+-dashboard
+-seed
+-location
+-cohort
+
+
+
+-posts

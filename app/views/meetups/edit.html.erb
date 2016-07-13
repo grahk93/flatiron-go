@@ -1,0 +1,13 @@
+<%= form_for @meetup do |f| %>
+  <%= f.label :title%> 
+  <%= f.text_field :title %> <br>
+  <%= f.label :description %> 
+  <%= f.text_area :description %> <br>
+  <%= f.label :date %> 
+  <%= f.text_field :date %> <br>
+  <%= f.label :time%> 
+  <%= f.text_field :time %> <br>
+  <%= f.label :location_id%> 
+  <%= f.text_field :location_id %> <br>
+  <%= f.submit "Update Meetup" %> 
+<%end%>

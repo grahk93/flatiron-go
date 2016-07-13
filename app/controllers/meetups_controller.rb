@@ -25,6 +25,7 @@ class MeetupsController < ApplicationController
   def update
     @meetup = Meetup.find(params[:id])
     @meetup.update(meetup_params)
+    redirect_to meetup_path(@meetup)
   end 
 
   def destroy
