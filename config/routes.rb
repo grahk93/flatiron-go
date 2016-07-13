@@ -20,4 +20,5 @@ Rails.application.routes.draw do
   get '/meetups/:id/edit' => 'meetups#edit', as: 'edit_meetup'
   patch '/meetups/:id' => 'meetups#update'
   delete '/meetups/:id' => 'meetups#destroy', as: 'delete_meetup'
+  post '/meetups/:id' => 'meetups#join', as: 'join_meetup'
 end

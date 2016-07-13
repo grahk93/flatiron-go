@@ -32,11 +32,23 @@ class MeetupsController < ApplicationController
     @meetup.delete 
   end 
 
+  def join
+     #add current user to current meetup
+    @meetup = Meetup.find(params[:id]) #current meetup
+    @attendant = Attendant.find_or_create_by(user: current_user) #current attendant/user
+    MeetupAttendant.create(meetup: @meetup, attendant: @attendant) #assign meetup to attendant and vice versa
+    redirect_to meetup_path(@meetup) #show that meetup
+  end 
+
 private
 
   def meetup_params
     params.require(:meetup).permit(:title, :date, :time, :location_id, :description)
   end
+
+  # def meetup_id 
+  #   params.require(:meetup).permit(:id)
+  # end
 end
 
   # get '/meetups' => 'meetups#index'

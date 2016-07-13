@@ -1,2 +1,10 @@
 <%= @meetup.title %>
 <%= @meetup.host.name %> 
+<% @meetup.attendants.each do |attendant| %>
+   <%= attendant.name %>
+<%end%>
+
+<%= button_to 'Join Meetup', join_meetup_path, method: 'post' %>
+
+<!-- When join meetup button is clicked, 
+the meetup currently shown must be associated with the current user  -->
