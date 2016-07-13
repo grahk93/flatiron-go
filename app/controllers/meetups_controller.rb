@@ -11,7 +11,6 @@ class MeetupsController < ApplicationController
     @meetup = Meetup.new(meetup_params) #need host to create
     @meetup.host = Host.create(user: current_user)
     @meetup.save
-    byebug
     redirect_to meetup_path(@meetup)
   end 
 
