@@ -1,6 +1,13 @@
-<%= @meetup.title %>
-<%= @meetup.host.name %> 
-<% @meetup.attendants.each do |attendant| %>
+<%= link_to "My Profile", user_path(@user) %> 
+<%= link_to "Meetup Dashboard", dashboard_path %>
+<%= link_to "All Meetups", meetup_path %>
+<%= link_to "Logout", logout_path, method: :delete %> 
+<br>
+
+
+Title: <%= @meetup.title %> <br>
+Host: <%= @meetup.host.name %> <br>
+Attendants: <% @meetup.attendants.each do |attendant| %>
    <%= attendant.name %>
 <%end%>
 

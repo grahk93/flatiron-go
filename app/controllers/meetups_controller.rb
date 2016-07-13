@@ -15,6 +15,7 @@ class MeetupsController < ApplicationController
   end 
 
   def show 
+    @user = current_user
     @meetup = Meetup.find(params[:id])
   end 
 
@@ -34,6 +35,7 @@ class MeetupsController < ApplicationController
   end 
 
   def dashboard
+    @user = current_user
   end
 
   def join

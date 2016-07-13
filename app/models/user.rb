@@ -2,9 +2,13 @@ class User < ApplicationRecord
   has_secure_password
   #belongs_to :cohort
 
-  def my_meetups 
+  def meetups_hosting
   end
 
-  def my_cohorts_meetups
+  def meetups_attending
   end
+
+  def meetups_attended
+  end
+  
 end
