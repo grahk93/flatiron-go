@@ -6,18 +6,18 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy', as: 'logout'
 
-  get '/users/new' => 'users#new', as: 'signup'
+  get '/signup' => 'users#new', as: 'signup'
   post '/users' => 'users#create'
   get '/users/:id' => 'users#show', as: 'user'
   get '/users/:id/edit' => 'users#edit', as: 'edit_user'
   patch '/users/:id' => 'users#update'
 
 
-  get '/meetups' => 'meetups#index'
-  get '/meetups/new' => 'meetups#new'
+  get '/meetups' => 'meetups#index', as: 'meetups'
+  get '/meetups/new' => 'meetups#new', as: 'new_meetup'
   post '/meetups' => 'meetups#create'
-  get '/meetups/:id' => 'meetups#show'
-  get '/meetups/:id/edit' => 'meetups#edit'
+  get '/meetups/:id' => 'meetups#show', as: 'meetup'
+  get '/meetups/:id/edit' => 'meetups#edit', as: 'edit_meetup'
   patch '/meetups/:id' => 'meetups#update'
-  delete '/meetups/:id' => 'meetups#destroy'
+  delete '/meetups/:id' => 'meetups#destroy', as: 'delete_meetup'
 end
