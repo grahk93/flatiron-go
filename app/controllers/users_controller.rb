@@ -30,10 +30,6 @@ class UsersController < ApplicationController
     redirect_to user_path(params[:id])
   end 
 
-  def dashboard
-    @user_meetups = self.my_meetups
-    @user_cohort_meetups = self.my_cohorts_meetups 
-  end
 
 private
   def user_params

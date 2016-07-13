@@ -33,6 +33,9 @@ class MeetupsController < ApplicationController
     @meetup.delete 
   end 
 
+  def dashboard
+  end
+
   def join
      #add current user to current meetup
     @meetup = Meetup.find(params[:id]) #current meetup

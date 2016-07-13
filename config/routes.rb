@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get '/users/:id' => 'users#show', as: 'user'
   get '/users/:id/edit' => 'users#edit', as: 'edit_user'
   patch '/users/:id' => 'users#update'
-  get '/dashboard' => 'users#dashboard', as: 'dashboard'
+ 
 
   # MeetupsController Routes
   get '/meetups' => 'meetups#index', as: 'meetups'
@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   patch '/meetups/:id' => 'meetups#update'
   delete '/meetups/:id' => 'meetups#destroy', as: 'delete_meetup'
   post '/meetups/:id' => 'meetups#join', as: 'join_meetup'
+  get '/dashboard' => 'meetups#dashboard', as: 'dashboard'
 
   # CohortsController Routes
   get '/cohorts/new' => 'cohorts#new', as: 'new_cohort'
