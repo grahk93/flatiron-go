@@ -1,5 +1,6 @@
 class MeetupsController < ApplicationController
   def index 
+    @user = current_user
     @meetups = Meetup.all
   end 
 
