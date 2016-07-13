@@ -8,7 +8,11 @@ class MeetupsController < ApplicationController
   end 
   
   def create 
-    @meetup = Meetup.create(meetup_params)
+    @meetup = Meetup.new(meetup_params) #need host to create
+    @meetup.host = Host.create(user: current_user)
+    @meetup.save
+    byebug
+    redirect_to meetup_path(@meetup)
   end 
 
   def show 
