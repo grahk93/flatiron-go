@@ -1,4 +1,4 @@
 class User < ApplicationRecord
   has_secure_password
-  belongs_to :cohort
+  #belongs_to :cohort
 end
