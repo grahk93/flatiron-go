@@ -31,6 +31,8 @@ Rails.application.routes.draw do
   delete '/cohorts/:id' => 'cohorts#destroy', as: 'delete_cohort'
 
   # LocationsController Routes
-
-
+  get '/locations/new' => 'locations#new', as: 'new_location'
+  post '/locations' => 'locations#create'
+  get '/locations/:id' => 'locations#show', as: 'location'
+  delete '/cohorts/:id' => 'locations#destroy', as: 'delete_location'
 end
