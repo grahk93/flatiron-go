@@ -5,24 +5,32 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
+    session[:user_id] = @user.id
+    redirect_to user_path(@user)
   end 
 
   def show 
-    @user = User.find(params[:id])
+    if params[:id] == current_user.id.to_s 
+      @user = User.find(params[:id])
+    end
   end 
 
   def edit 
-    @user = User.find(params[:id])
+    if params[:id] == current_user.id.to_s 
+      @user = User.find(params[:id])
+    end
   end 
 
   def update
-    @user = User.find(params[:id]) 
-    @user.update(user_params) #might need dif params here 
+    if params[:id] == current_user.id.to_s 
+      @user = User.find(params[:id]) 
+      @user.update(user_params) #might need dif params here 
+    end
   end 
 
 private
   def user_params
-    params.require(:user).permit(:email, :user_name, :password)
+    params.require(:user).permit(:user_name, :password)
   end
 end
   # get '/users/new' => 'users#new' #signup 
