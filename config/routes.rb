@@ -25,9 +25,12 @@ Rails.application.routes.draw do
   post '/meetups/:id' => 'meetups#join', as: 'join_meetup'
 
   # CohortsController Routes
-
+  get '/cohorts/new' => 'cohorts#new', as: 'new_cohort'
+  post '/cohorts' => 'cohorts#create'
+  get '/cohorts/:id' => 'cohorts#show', as: 'cohort'
+  delete '/cohorts/:id' => 'cohorts#destroy', as: 'delete_cohort'
 
   # LocationsController Routes
 
-  
+
 end
