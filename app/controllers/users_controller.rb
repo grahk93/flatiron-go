@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :login_required, only [:new, :create]
+  skip_before_action :login_required, only: [:new, :create]
   def new 
     @user = User.new
   end 
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
 private
   def user_params
-    params.require(:user).permit(:user_name, :password)
+    params.require(:user).permit(:email, :user_name, :password)
   end
 end
   # get '/users/new' => 'users#new' #signup 
