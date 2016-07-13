@@ -1,1 +1,9 @@
-hi 
+<%= form_for @user do |f| %>
+  <%= f.label :name %> 
+  <%= f.text_field :name %> <br>
+  <%= f.label :cohort_id %> 
+  <%= f.text_field :cohort_id %> <br>
+  <%= f.label :bio %> 
+  <%= f.text_area :bio %> <br>
+  <%= f.submit "Update Profile" %> 
+<%end%>

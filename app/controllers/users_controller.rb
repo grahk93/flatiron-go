@@ -25,13 +25,18 @@ class UsersController < ApplicationController
   def update
     if params[:id] == current_user.id.to_s 
       @user = User.find(params[:id]) 
-      @user.update(user_params) #might need dif params here 
+      @user.update(edit_user_params) 
     end
+    redirect_to user_path(params[:id])
   end 
 
 private
   def user_params
     params.require(:user).permit(:email, :user_name, :password)
+  end
+
+  def edit_user_params
+    params.require(:user).permit(:name, :cohort_id, :bio)
   end
 end
   # get '/users/new' => 'users#new' #signup 
