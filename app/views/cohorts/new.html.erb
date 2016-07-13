@@ -1,4 +1,5 @@
-<% form_for @cohort do |f| -%>
+<%= form_for @cohort do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
-<% end -%>
+  <%= f.submit "Create Cohort" %>
+<% end %>
