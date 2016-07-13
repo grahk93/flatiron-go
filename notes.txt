@@ -19,3 +19,8 @@ tests (be able to write one by the end of the day)
 
 
 -posts
+
+Dashboard 
+Your meetups 
+Your cohort's meetups 
+

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/users/:id' => 'users#show', as: 'user'
   get '/users/:id/edit' => 'users#edit', as: 'edit_user'
   patch '/users/:id' => 'users#update'
+  get '/dashboard' => 'users#dashboard', as: 'dashboard'
 
 
   get '/meetups' => 'meetups#index', as: 'meetups'
