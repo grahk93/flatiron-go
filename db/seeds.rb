@@ -24,14 +24,14 @@ end
 end
 
 # refactor user creation
-Cohort.all.each do |cohort|
-  Random.rand(18..24).times do 
+Cohort.all.each_with_index do |cohort, i1|
+  Random.rand(18..24).times do |i2|
     FactoryGirl.create(:user, 
       cohort_id: (cohort.id), 
       name: Faker::Name.name, 
-      email: "#{Faker::Internet.user_name}@flatironschool.com", 
-      user_name: Faker::Internet.user_name, 
-      password: Faker::Internet.password, 
+      email: "#{Faker::Internet.user_name(5..12)}#{i1}#{i2}@flatironschool.com", 
+      user_name: "#{Faker::Internet.user_name(3..17)}#{i1}#{i2}", 
+      password: Faker::Internet.password(6, 20), 
       bio: Faker::Lorem.sentence
     )
   end
@@ -45,8 +45,24 @@ Random.rand(10..15).times do
     host: Host.find_or_create_by(
       user: User.find(
         Random.rand(
-          1..(User.all.length))
-      )), 
-    location_id: Random.rand(1..6)
+          (User.first.id)..(User.last.id))
+      )),
+    date: Date.today,
+    time: Time.now,
+    location_id: Random.rand((Location.first.id)..(Location.last.id))
   )
 end
+
+# Populate the meetups with attendants
+Meetup.all.each do |meetup|
+ meetup.host.cohort.users.each do |attendee|
+   if Random.rand(0..10) > 7
+     MeetupAttendant.create(meetup: meetup, attendant: Attendant.find_or_create_by(user: attendee)) unless attendee == meetup.host.user
+   end
+ end
+end
+
+
+
+
+

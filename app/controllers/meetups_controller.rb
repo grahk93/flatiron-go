@@ -6,7 +6,8 @@ class MeetupsController < ApplicationController
 
   def new 
     @meetup = Meetup.new
-    @days = Date.today..Date.today.advance(days: 6)
+    @days = Meetup.days
+    @times = Meetup.times
   end 
   
   def create 
