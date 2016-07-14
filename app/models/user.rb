@@ -17,6 +17,7 @@ class User < ApplicationRecord
   end
 
   def meetups_hosting
+    
   end
 
   def meetups_attending
@@ -28,6 +29,6 @@ class User < ApplicationRecord
   end
   
   def all_attendees
-    
+
   end
 end
