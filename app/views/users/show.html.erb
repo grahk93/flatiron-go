@@ -9,9 +9,9 @@ Cohort: <%= link_to @user.cohort.name, cohort_path(@user.cohort_id) %> <br>
 Bio: <%= @user.bio %> <br>
 
 <ul>
-<li><%= button_to 'edit_user', edit_user_path, method: 'get' %></li>
-<li><%= button_to 'new_meetup', new_meetup_path, method: 'get' %></li>
-<li><%= button_to 'meetups', meetups_path, method: 'get' %></li>
+<li><%= button_to 'Edit Info', edit_user_path, method: 'get' %></li>
+<li><%= button_to 'New Meetup', new_meetup_path, method: 'get' %></li>
+<li><%= button_to 'All Meetups', meetups_path, method: 'get' %></li>
 </ul>
 <br>
 

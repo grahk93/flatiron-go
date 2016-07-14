@@ -1,4 +1,4 @@
-<%= @location.name %>
+<%= @location.name %><br>
 <% @meetups.each do |meetup| %>
   <%= link_to meetup.name, meetup_path(meetup) %> <br>
 <% end %>
