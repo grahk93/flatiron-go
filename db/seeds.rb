@@ -51,18 +51,6 @@ Cohort.all.each_with_index do |cohort, i1|
   end
 end
 
-# def choose_time(meetup_days, meetup_times)
-#   date = meetup_days[Random.rand(0..(meetup_days.length - 1))]
-#   time = meetup_times[Random.rand(0..(meetup_times.length - 1))]
-#   location_id = Random.rand((Location.first.id)..(Location.last.id))
-
-#   if Meetup.available?(location_id, date, time)
-#     return [location_id, date, time]
-#   else
-#     choose_time(meetup_days, meetup_times)
-#   end
-# end
-
 # Create some meetups and hosts!
 Random.rand(9..13).times do |i| 
   FactoryGirl.create( :meetup, 
