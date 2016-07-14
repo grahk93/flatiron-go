@@ -35,6 +35,8 @@ end
   FactoryGirl.create :location, name: "#{Faker::Name.last_name} Room"
 end
 
+locations = Location.all.to_a
+
 # refactor user creation
 Cohort.all.each_with_index do |cohort, i1|
   Random.rand(18..24).times do |i2|
@@ -49,21 +51,20 @@ Cohort.all.each_with_index do |cohort, i1|
   end
 end
 
-def choose_time
-  date = meetup_days[Random.rand(0..(num_dates - 1))]
-  time = meetup_times[Random.rand(0..(end_times - start_times))]
-  location_id = Random.rand((Location.first.id)..(Location.last.id))
+# def choose_time(meetup_days, meetup_times)
+#   date = meetup_days[Random.rand(0..(meetup_days.length - 1))]
+#   time = meetup_times[Random.rand(0..(meetup_times.length - 1))]
+#   location_id = Random.rand((Location.first.id)..(Location.last.id))
 
-  if Meetup.available?(location_id, date, time)
-    return [location_id, date, time]
-  else
-    choose_time
-  end
-end
+#   if Meetup.available?(location_id, date, time)
+#     return [location_id, date, time]
+#   else
+#     choose_time(meetup_days, meetup_times)
+#   end
+# end
 
 # Create some meetups and hosts!
-Random.rand(10..15).times do |i| 
-  info = choose_time
+Random.rand(9..13).times do |i| 
   FactoryGirl.create( :meetup, 
     title: "#{Faker::Hacker.verb} the #{Faker::Hacker.noun}", 
     description: Faker::Hacker.say_something_smart, 
@@ -72,9 +73,9 @@ Random.rand(10..15).times do |i|
         Random.rand(
           (User.first.id)..(User.last.id))
       )),
-    date: info[1],
-    time: info[2],
-    location_id: info[3]
+    location_id: Random.rand((Location.first.id)..(Location.last.id)),
+    date: meetup_days[Random.rand(0..(meetup_days.length - 1))],
+    time: meetup_times[Random.rand(0..(meetup_times.length - 1))]
   )
 end
 

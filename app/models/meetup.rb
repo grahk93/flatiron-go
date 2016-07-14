@@ -37,7 +37,9 @@ class Meetup < ApplicationRecord
   end
 
   def self.available?(location_id, date, time)
-    Meetup.where(location_id: location_id, date: date, time: time) == nil
+    if Meetup.where(location_id: location_id, date: date, time: time) == nil
+      return [location_id, date, time]
+    end
   end
 
   # validation methods
@@ -48,7 +50,7 @@ class Meetup < ApplicationRecord
 
   def time_must_be_available
     errors.add(:time, "must be available") if 
-      Meetup.where(location: location, date: date, time: time) != nil
+      Meetup.where(location: location, date: date, time: time)[0] != nil
   end
 
   # public methods
