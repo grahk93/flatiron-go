@@ -2,15 +2,16 @@
 <%= link_to "Logout", logout_path, method: :delete %> 
 
 <h3>Profile</h3>
+User Name: <%= @user.user_name %> <br>
 Email: <%= @user.email %> <br>
 Name: <%= @user.name %> <br>
-Cohort: <%= @user.cohort_id %> <br>
+Cohort: <%= link_to @user.cohort.name, cohort_path(@user.cohort_id) %> <br>
 Bio: <%= @user.bio %> <br>
 
 <ul>
-<li><%= button_to 'edit_user', edit_user_path, method: 'get' %></li>
-<li><%= button_to 'new_meetup', new_meetup_path, method: 'get' %></li>
-<li><%= button_to 'meetups', meetups_path, method: 'get' %></li>
+<li><%= button_to 'Edit Info', edit_user_path, method: 'get' %></li>
+<li><%= button_to 'New Meetup', new_meetup_path, method: 'get' %></li>
+<li><%= button_to 'All Meetups', meetups_path, method: 'get' %></li>
 </ul>
 <br>
 
@@ -18,5 +19,15 @@ Meetups I'm hosting <br>
 Meetups I'm attending <br>
 Meetups I've been to <br> 
 
+<ul>
+<li><%= button_to 'All Cohorts', cohorts_path, method: 'get' %></li>
+<li><%= button_to 'All Locations', locations_path, method: 'get' %></li>
+</ul>
 
+<% if admin? %>
+<ul>
+<li><%= button_to 'New Cohort', new_cohort_path, method: 'get' %></li>
+<li><%= button_to 'New Location', new_location_path, method: 'get' %></li>
+</ul>
+<% end %>
 
