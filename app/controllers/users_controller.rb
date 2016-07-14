@@ -2,6 +2,16 @@ class UsersController < ApplicationController
   helper_method :admin?
   skip_before_action :login_required, only: [:new, :create]
   
+  def index
+    if admin?
+      @users = User.all
+    elsif session[:user_id] != nil
+      redirect_to dashboard_path(session[:user_id])
+    else
+      redirect_to root_path
+    end
+  end
+
   def new 
     @user = User.new
   end 
@@ -13,17 +23,23 @@ class UsersController < ApplicationController
     @user.save
     session[:user_id] = @user.id
     if @user.valid?
-      redirect_to user_path(@user)
+      redirect_to profile_path(@user)
     else
       render 'new'
     end
   end 
 
   def show 
+      @user = User.find(params[:id])
+  end 
+
+  def profile
     if params[:id] == current_user.id.to_s 
       @user = User.find(params[:id])
+    else
+      redirect_to profile_path(current_user)
     end
-  end 
+  end
 
   def edit 
     if params[:id] == current_user.id.to_s 
@@ -36,7 +52,7 @@ class UsersController < ApplicationController
       @user = User.find(params[:id]) 
       @user.update(edit_user_params) 
     end
-    redirect_to user_path(params[:id])
+    redirect_to profile_path(params[:id])
   end 
 
   def admin?

@@ -8,12 +8,13 @@ Rails.application.routes.draw do
   delete '/logout' => 'sessions#destroy', as: 'logout'
 
   # UsersController Routes
+  get '/users' => 'users#index', as: 'users'
   get '/signup' => 'users#new', as: 'signup'
   post '/users' => 'users#create'
   get '/users/:id' => 'users#show', as: 'user'
-  get '/users/:id/edit' => 'users#edit', as: 'edit_user'
+  get '/users/profile/:id' => 'users#profile', as: 'profile'
+  get '/users/:id/edit' => 'users#edit', as: 'edit_profile'
   patch '/users/:id' => 'users#update'
- 
 
   # MeetupsController Routes
   get '/meetups' => 'meetups#index', as: 'meetups'

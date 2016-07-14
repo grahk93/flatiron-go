@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if user != nil 
       if user.authenticate(password_param)
       session[:user_id] = user.id 
-      redirect_to user_path(session[:user_id])
+      redirect_to profile_path(session[:user_id])
       else
       flash.now[:invalidpass] = 'Incorrect password'
       render 'new'
