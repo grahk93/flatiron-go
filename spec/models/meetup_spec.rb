@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Meetup, :type => :model do 
-  let(:user) { FactoryGirl.create(:user) }
-
+  let(:cohort) { FactoryGirl.create(:cohort) }
+  let(:user) { FactoryGirl.create(:user, cohort: cohort) }
   let(:location) { FactoryGirl.create(:location) }
-
-  let(:meetup) { FactoryGirl.create(:meetup, host: Host.create(user: user)) }
+  let(:meetup) { FactoryGirl.create(:meetup, location: location, host: Host.create(user: user)) }
 
   #basics
   it "is valid" do 
