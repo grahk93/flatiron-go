@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_secure_password
   belongs_to :cohort
+  has_one :attendant
+  has_one :host
   accepts_nested_attributes_for :cohort
 
   def email_valid?
@@ -18,8 +20,14 @@ class User < ApplicationRecord
   end
 
   def meetups_attending
+    
   end
 
   def meetups_attended
+
+  end
+  
+  def all_attendees
+    
   end
 end
