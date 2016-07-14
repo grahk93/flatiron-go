@@ -8,13 +8,41 @@ class Meetup < ApplicationRecord
 
 
   belongs_to :host
-  #belongs_to :location
+  has_one :cohort, through: :host
+  belongs_to :location
   has_many :meetup_attendants
   has_many :attendants, through: :meetup_attendants
+
+  accepts_nested_attributes_for :location
 
   def date_cannot_be_in_the_past
     errors.add(:date, "can't be in the past") if
       !date.blank? and date < Date.today  
   end
-  
-end
+
+  def today
+  end
+
+  def this_week
+  end
+
+  def by_cohort
+  end
+
+  def by_location
+  end
+
+  def by_host
+  end
+
+  def pop_location
+  end
+
+  def pop_day
+  end
+
+  def pop_time
+  end 
+
+
+end 

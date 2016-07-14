@@ -4,5 +4,14 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: /@flatironschool.com/, message: "must be a Flatiron School email" }
 
   has_secure_password
-  #belongs_to :cohort
+  belongs_to :cohort
+  accepts_nested_attributes_for :cohort
+  def meetups_hosting
+  end
+
+  def meetups_attending
+  end
+
+  def meetups_attended
+  end
 end

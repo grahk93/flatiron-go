@@ -1,10 +1,12 @@
 class MeetupsController < ApplicationController
   def index 
+    @user = current_user
     @meetups = Meetup.all
   end 
 
   def new 
     @meetup = Meetup.new
+    @days = Date.today..Date.today.advance(days: 6)
   end 
   
   def create 
@@ -15,6 +17,7 @@ class MeetupsController < ApplicationController
   end 
 
   def show 
+    @user = current_user
     @meetup = Meetup.find(params[:id])
   end 
 
@@ -32,6 +35,10 @@ class MeetupsController < ApplicationController
     @meetup = Meetup.find(params[:id])
     @meetup.delete 
   end 
+
+  def dashboard
+    @user = current_user
+  end
 
   def join
      #add current user to current meetup
@@ -51,11 +58,3 @@ private
   #   params.require(:meetup).permit(:id)
   # end
 end
-
-  # get '/meetups' => 'meetups#index'
-  # get '/meetups/new' => 'meetups#new'
-  # post '/meetups' => 'meetups#create'
-  # get '/meetups/:id' => 'meetups#show'
-  # get '/meetups/:id/edit' => 'meetups#edit'
-  # patch '/meetups/:id' => 'meetups#update'
-  # delete '/meetups/:id' => 'meetups#destroy'
