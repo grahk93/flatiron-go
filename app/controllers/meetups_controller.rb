@@ -5,6 +5,7 @@ class MeetupsController < ApplicationController
 
   def new 
     @meetup = Meetup.new
+    @days = Date.today..Date.today.advance(days: 6)
   end 
   
   def create 
@@ -51,11 +52,3 @@ private
   #   params.require(:meetup).permit(:id)
   # end
 end
-
-  # get '/meetups' => 'meetups#index'
-  # get '/meetups/new' => 'meetups#new'
-  # post '/meetups' => 'meetups#create'
-  # get '/meetups/:id' => 'meetups#show'
-  # get '/meetups/:id/edit' => 'meetups#edit'
-  # patch '/meetups/:id' => 'meetups#update'
-  # delete '/meetups/:id' => 'meetups#destroy'

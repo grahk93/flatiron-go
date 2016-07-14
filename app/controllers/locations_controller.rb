@@ -5,6 +5,7 @@ class LocationsController < ApplicationController
 
   def create
     @location = Location.create(name: create_params)
+    redirect_to location_path(@location)
   end
 
   def show
@@ -15,5 +16,11 @@ class LocationsController < ApplicationController
   def destroy
     @location = Cohort.find(params[:id])
     @location.delete
+  end
+
+  private
+
+  def create_params
+    params.require(:location).permit(:name)[:name]
   end
 end
