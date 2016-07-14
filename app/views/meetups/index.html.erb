@@ -1,3 +1,8 @@
+<%= link_to "My Profile", user_path(@user) %> 
+<%= link_to "Meetup Dashboard", dashboard_path %>
+<%= link_to "Logout", logout_path, method: :delete %> 
+
+
 <% @meetups.each do |meetup| %>
   <p> <%= link_to meetup.title, meetup_path(meetup) %> </p>
 <% end %>

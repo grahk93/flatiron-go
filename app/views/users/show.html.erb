@@ -1,9 +1,22 @@
-Logout <%= button_to 'logout', logout_path, method: 'delete' %>
-Edit Profile <%= button_to 'edit_user', edit_user_path, method: 'get' %>
-Create Meetup <%= button_to 'new_meetup', new_meetup_path, method: 'get' %>
-All Meetups <%= button_to 'meetups', meetups_path, method: 'get' %>
+<%= link_to "Meetup Dashboard", dashboard_path %> 
+<%= link_to "Logout", logout_path, method: :delete %> 
 
-Email: <%= @user.email %>
-Name: <%= @user.name %>
-Cohort: <%= @user.cohort_id %>
-Bio: <%= @user.bio %>
+<h3>Profile</h3>
+Email: <%= @user.email %> <br>
+Name: <%= @user.name %> <br>
+Cohort: <%= @user.cohort_id %> <br>
+Bio: <%= @user.bio %> <br>
+
+<ul>
+<li><%= button_to 'edit_user', edit_user_path, method: 'get' %></li>
+<li><%= button_to 'new_meetup', new_meetup_path, method: 'get' %></li>
+<li><%= button_to 'meetups', meetups_path, method: 'get' %></li>
+</ul>
+<br>
+
+Meetups I'm hosting <br>
+Meetups I'm attending <br>
+Meetups I've been to <br> 
+
+
+
