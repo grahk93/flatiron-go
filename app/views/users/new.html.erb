@@ -1,4 +1,15 @@
 <%= form_for @user do |f| %>
+  
+  <% if @user.errors.any? %>
+    <h2>Errors:</h2>
+      <% @user.errors.keys.each { |attr| @user.errors[attr].delete_at(1) } %> 
+        <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+  <% end %>
+
   <%= f.label :cohort %>
   <%= f.collection_select :cohort_id, Cohort.all, :id, :name %><br>
   <%= f.label :email %> 
