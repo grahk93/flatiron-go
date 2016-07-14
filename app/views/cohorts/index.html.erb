@@ -1,0 +1,3 @@
+<% @cohorts.all.each do |cohort| %>
+  <%= link_to cohort.name, cohort_path(cohort) %><br>
+<% end %>

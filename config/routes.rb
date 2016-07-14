@@ -27,12 +27,14 @@ Rails.application.routes.draw do
   get '/dashboard' => 'meetups#dashboard', as: 'dashboard'
 
   # CohortsController Routes
+  get '/cohorts' => 'cohorts#index', as: 'cohorts'
   get '/cohorts/new' => 'cohorts#new', as: 'new_cohort'
   post '/cohorts' => 'cohorts#create'
   get '/cohorts/:id' => 'cohorts#show', as: 'cohort'
   delete '/cohorts/:id' => 'cohorts#destroy', as: 'delete_cohort'
 
   # LocationsController Routes
+  get '/locations' => 'locations#index', as: 'locations'
   get '/locations/new' => 'locations#new', as: 'new_location'
   post '/locations' => 'locations#create'
   get '/locations/:id' => 'locations#show', as: 'location'
