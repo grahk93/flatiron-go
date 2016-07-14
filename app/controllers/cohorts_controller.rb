@@ -1,4 +1,6 @@
 class CohortsController < ApplicationController
+  helper_method :admin?
+
   def new
     @cohort = Cohort.new
   end

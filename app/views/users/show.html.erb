@@ -19,4 +19,7 @@ Meetups I'm attending <br>
 Meetups I've been to <br> 
 
 
+<% if admin? %>
+<li><%= button_to 'New Cohort', new_cohort_path, method: 'get' %></li>
+<% end %>
 

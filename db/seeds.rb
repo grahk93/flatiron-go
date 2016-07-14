@@ -29,7 +29,7 @@ Cohort.all.each do |cohort|
     FactoryGirl.create(:user, 
       cohort_id: (cohort.id), 
       name: Faker::Name.name, 
-      email: "#{Faker::Internet.user_name}@flatiron.com", 
+      email: "#{Faker::Internet.user_name}@flatironschool.com", 
       user_name: Faker::Internet.user_name, 
       password: Faker::Internet.password, 
       bio: Faker::Lorem.sentence

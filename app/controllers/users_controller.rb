@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+  helper_method :admin?
   skip_before_action :login_required, only: [:new, :create]
+  
   def new 
     @user = User.new
   end 
@@ -37,6 +39,9 @@ class UsersController < ApplicationController
     redirect_to user_path(params[:id])
   end 
 
+  def admin?
+    User.find(session[:user_id]).admin
+  end
 
 private
   def user_params

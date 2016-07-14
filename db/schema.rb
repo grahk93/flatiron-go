@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712192906) do
+ActiveRecord::Schema.define(version: 20160714180530) do
 
   create_table "attendants", force: :cascade do |t|
     t.integer  "user_id"
@@ -61,8 +61,9 @@ ActiveRecord::Schema.define(version: 20160712192906) do
     t.string   "name"
     t.text     "bio"
     t.integer  "cohort_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.boolean  "admin",           default: false
   end
 
 end
