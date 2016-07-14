@@ -25,7 +25,7 @@ end
 
 # refactor user creation
 Cohort.all.each do |cohort|
-  18..24.times do 
+  Random.rand(18..24).times do 
     FactoryGirl.create(:user, 
       cohort_id: (cohort.id), 
       name: Faker::Name.name, 
@@ -36,9 +36,9 @@ Cohort.all.each do |cohort|
     )
   end
 end
-# Create some meetups and hosts!
 
-10..15.times do 
+# Create some meetups and hosts!
+Random.rand(10..15).times do 
   FactoryGirl.create( :meetup, 
     title: "#{Faker::Hacker.verb} the #{Faker::Hacker.noun}", 
     description: Faker::Hacker.say_something_smart, 
