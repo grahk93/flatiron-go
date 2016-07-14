@@ -55,12 +55,13 @@ end
 
 # Populate the meetups with attendants
 Meetup.all.each do |meetup|
-  meetup.host.cohort.users.each do |attendee|
-    if Random.rand(0..10) > 7
-      MeetupAttendant.create(meetup: meetup, attendant: Attendant.create(user: attendee)) unless attendee == meetup.host.user
-    end
-  end
+ meetup.host.cohort.users.each do |attendee|
+   if Random.rand(0..10) > 7
+     MeetupAttendant.create(meetup: meetup, attendant: Attendant.find_or_create_by(user: attendee)) unless attendee == meetup.host.user
+   end
+ end
 end
+
 
 
 

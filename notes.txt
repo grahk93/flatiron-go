@@ -3,10 +3,6 @@ location and cohort (together)
 validations (together)
 tests (be able to write one by the end of the day)
   and setup 
-
-
-
-
 -tests 
 -validations
 -fields to drop 
@@ -14,13 +10,24 @@ tests (be able to write one by the end of the day)
 -dashboard
 -seed
 -location
--cohort
-
-
-
+-cohor
 -posts
 
-Dashboard 
-Your meetups 
-Your cohort's meetups 
+TO DO (6/13/16 10:30)
+Site functionality 
+  Chris 
+    Seed w/ @flatiron
+    Date and time 
+    Methods and validatios for date and time 
+  David 
+    Methods and validations for date and time
+    Methods and validations for buttons 
 
+  Grace   
+    Sign up from login page 
+    Active Record queries 
+
+Methods 
+
+
+Tests 

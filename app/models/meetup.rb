@@ -26,13 +26,13 @@ class Meetup < ApplicationRecord
   def this_week
   end
 
-  def by_cohort
-  end
-
   def by_location
   end
 
   def by_host
+  end
+
+  def by_cohort
   end
 
   def pop_location
