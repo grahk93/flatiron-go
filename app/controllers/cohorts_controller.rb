@@ -5,6 +5,7 @@ class CohortsController < ApplicationController
 
   def create
     @cohort = Cohort.create(name: create_params)
+    redirect_to cohort_path(@cohort)
   end
 
   def show
@@ -20,6 +21,6 @@ class CohortsController < ApplicationController
   private
 
   def create_params
-    params.require(:cohort).permit(:name)
+    params.require(:cohort).permit(:name)[:name]
   end
 end

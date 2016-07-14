@@ -5,7 +5,10 @@ class UsersController < ApplicationController
   end 
 
   def create
-    @user = User.create(user_params)
+    @user = User.new(user_params)
+    @cohort = Cohort.find(cohort_params)
+    @user.cohort = @cohort
+    @user.save
     session[:user_id] = @user.id
     redirect_to user_path(@user)
   end 
@@ -39,9 +42,8 @@ private
   def edit_user_params
     params.require(:user).permit(:name, :cohort_id, :bio)
   end
+
+  def cohort_params
+    params.require(:user).permit(:cohort_id)[:cohort_id]
+  end
 end
-  # get '/users/new' => 'users#new' #signup 
-  # post '/users' => 'users#create'
-  # get '/users/:id' => 'users#show'
-  # get '/users/:id/edit' => 'users#edit'
-  # patch '/users/:id' => 'users#update'
