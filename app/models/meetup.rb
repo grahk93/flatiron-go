@@ -1,3 +1,6 @@
+# Have these methods be feature driven - I think that will lead them to be more complicated.  
+# Maybe narrow down the scope of the application to drive features.
+
 class Meetup < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
