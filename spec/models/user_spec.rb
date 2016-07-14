@@ -1,19 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe User, :type => :model do 
-  let(:cohort) {
-    Cohort.create(name: "pets_database.db")
-  }
+  let(:cohort) { FactoryGirl.create(:cohort) }
 
-  let(:user) {
-    User.create(
-      name: "Jeff Katz",
-      email: "jeffkatz@flatiron.com",
-      user_name: "jeffkatz",
-      cohort_id: cohort.id,
-      password: "jeffrulez"
-    )
-  }
+  let(:user) { FactoryGirl.create(:user, cohort_id: cohort.id) }
 
   #basics
   it "is valid" do 
