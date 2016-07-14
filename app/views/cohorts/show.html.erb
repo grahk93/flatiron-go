@@ -1,4 +1,5 @@
-<%= @cohort.name %><br>
+<h2><%= @cohort.name %></h2>
+<br>
 <% @users.each do |user| %>
   <%= link_to user.name, user_path(user) %> <br>
 <% end %>

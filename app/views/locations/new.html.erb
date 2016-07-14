@@ -1,4 +1,14 @@
 <%= form_for @location do |f| %>
+  <% if @location.errors.any? %>
+    <h3>Errors:</h3>
+      <% @location.errors.keys.each { |attr| @location.errors[attr].delete_at(1) } %> 
+        <ul>
+        <% @location.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li><br>
+        <% end %>
+        </ul>
+  <% end %>
+
   <%= f.label :name %>
   <%= f.text_field :name %><br>
   <%= f.submit "Create Location" %>

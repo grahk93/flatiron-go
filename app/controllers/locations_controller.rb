@@ -1,16 +1,24 @@
 class LocationsController < ApplicationController
  
   def index
-    @locations = Location.all
+      @locations = Location.all
   end
 
   def new
-    @location = Location.new
+    if admin?
+      @location = Location.new
+    else
+      redirect_to profile_path(session[:user_id])
+    end
   end
 
   def create
     @location = Location.create(name: create_params)
-    redirect_to location_path(@location)
+    if @location.valid?
+      redirect_to location_path(@location)
+    else
+      render 'new'
+    end
   end
 
   def show

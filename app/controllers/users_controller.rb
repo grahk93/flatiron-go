@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  helper_method :admin?
   skip_before_action :login_required, only: [:new, :create]
-  
+  helper_method :admin?
+
   def index
     if admin?
       @users = User.all
@@ -54,10 +54,6 @@ class UsersController < ApplicationController
     end
     redirect_to profile_path(params[:id])
   end 
-
-  def admin?
-    User.find(session[:user_id]).admin
-  end
 
 private
   def user_params

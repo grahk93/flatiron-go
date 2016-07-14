@@ -5,8 +5,12 @@ class MeetupsController < ApplicationController
   end 
 
   def new 
-    @meetup = Meetup.new
-    @days = Date.today..Date.today.advance(days: 6)
+    if admin?
+      @meetup = Meetup.new
+      @days = Date.today..Date.today.advance(days: 6)
+    else
+      redirect_to profile_path(session[:user_id])
+    end
   end 
   
   def create 

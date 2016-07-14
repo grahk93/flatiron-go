@@ -1,4 +1,15 @@
 <%= form_for @cohort do |f| %>
+  
+  <% if @cohort.errors.any? %>
+    <h3>Errors:</h3>
+      <% @cohort.errors.keys.each { |attr| @cohort.errors[attr].delete_at(1) } %> 
+        <ul>
+        <% @cohort.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li><br>
+        <% end %>
+        </ul>
+  <% end %>
+
   <%= f.label :name %>
   <%= f.text_field :name %><br>
   <%= f.submit "Create Cohort" %>

@@ -10,7 +10,11 @@ class CohortsController < ApplicationController
 
   def create
     @cohort = Cohort.create(name: create_params)
-    redirect_to cohort_path(@cohort)
+    if @cohort.valid?
+      redirect_to cohort_path(@cohort)
+    else
+      render 'new'
+    end
   end
 
   def show
