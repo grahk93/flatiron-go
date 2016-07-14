@@ -5,6 +5,7 @@ class Meetup < ApplicationRecord
   validates :time, presence: true
   validates :location_id, presence: true
   validate :date_cannot_be_in_the_past
+  validate :time_must_be_available
 
 
   belongs_to :host
@@ -15,9 +16,7 @@ class Meetup < ApplicationRecord
 
   accepts_nested_attributes_for :location
 
-  # times takes arguments in 0-24 hour increments, 
-  # returns 30 minute increments of AM/PM time in strings
-  # defaults from 9AM-6PM
+  # class methods
   def self.times(range=(9..18))
     range.each_with_object([]) do |time, array|
       if time < 12
@@ -33,16 +32,28 @@ class Meetup < ApplicationRecord
     end
   end
 
-  # days returns a number of dates, starting from today,
-  # and going forward the number of days provided in the argument.
-  # defaults to a week.
   def self.days(num_days=7)
     (Date.today..Date.today.advance(days: (num_days - 1))).to_a
   end
 
+  def self.available?(location_id, date, time)
+    Meetup.where(location_id: location_id, date: date, time: time) == nil
+  end
+
+  # validation methods
   def date_cannot_be_in_the_past
     errors.add(:date, "can't be in the past") if
       !date.blank? and date < Date.today  
+  end
+
+  def time_must_be_available
+    errors.add(:time, "must be available") if 
+      Meetup.where(location: location, date: date, time: time) != nil
+  end
+
+  # public methods
+  def available?
+    Meetup.where(location: location, date: date, time: time) == nil
   end
 
   def today

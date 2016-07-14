@@ -5,7 +5,10 @@ class User < ApplicationRecord
 
   has_secure_password
   belongs_to :cohort
+  has_one :attendant
+  has_one :host
   accepts_nested_attributes_for :cohort
+  
   def meetups_hosting
   end
 
