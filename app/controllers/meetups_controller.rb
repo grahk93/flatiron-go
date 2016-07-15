@@ -1,4 +1,6 @@
 class MeetupsController < ApplicationController
+  skip_before_action :login_required, only: [:new, :create]
+
   def index 
     @user = current_user
     if params[:search]
@@ -24,7 +26,6 @@ class MeetupsController < ApplicationController
   def show 
     @user = current_user
     @meetup = Meetup.find(params[:id])
-    byebug
   end 
 
   def edit  
