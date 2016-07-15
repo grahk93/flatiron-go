@@ -14,13 +14,16 @@ MeetupAttendant.destroy_all
 User.destroy_all
 
 # How many days should it generate from?
-num_dates = 7
+num_dates = 14
 # What time should meetups start (00-24)
 start_times = 9
 # What time should meetups end (00-24)
 end_times = 19
+# How many days ago should meetups start?
+days_ago = 7
 
-meetup_days = Meetup.date_range(num_dates - 1)
+
+meetup_days = Meetup.date_range(num_dates - 1, days_ago)
 
 meetup_times = Meetup.time_range(start_times..(end_times - 1))
 
@@ -53,7 +56,7 @@ end
 
 # Create some meetups and hosts!
 Random.rand(9..13).times do |i| 
-  meetup = Meetup.new( 
+  meetup = FactoryGirl.create(:meetup, 
     title: "#{Faker::Hacker.verb} the #{Faker::Hacker.noun}", 
     description: Faker::Hacker.say_something_smart, 
     host: Host.find_or_create_by(
@@ -62,11 +65,9 @@ Random.rand(9..13).times do |i|
           (User.first.id)..(User.last.id))
       )),
     location_id: Random.rand((Location.first.id)..(Location.last.id)),
-    set_date: Date.today(),
-    set_hour_min: "9:30 AM" 
+    set_date: meetup_days[Random.rand(0..(meetup_days.length - 1))],
+    set_hour_min: meetup_times[Random.rand(0..(meetup_times.length - 1))] 
   )
-  meetup.set_time
-  meetup.save(validate: false)
 end
 
 #meetup_days[Random.rand(0..(meetup_days.length - 1))],

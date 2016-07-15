@@ -25,8 +25,8 @@ class Meetup < ApplicationRecord
 
   # time methods
 
-  def self.date_range(num_days=7)
-    (Date.today..Date.today.advance(days: (num_days - 1))).to_a
+  def self.date_range(num_days=7, days_ago=0)
+    (((days_ago.days.ago).to_date)..((days_ago.days.ago).to_date.advance(days: (num_days - 1)))).to_a
   end
 
   def self.time_range(range=(9..18))
@@ -72,11 +72,7 @@ class Meetup < ApplicationRecord
     self.time = Time.new(date_info.year, date_info.month, date_info.day, time_info.hour, time_info.min)
   end
 
-  def today
-    Meetup.all.where(date = Date.today)
-  end
-
-  def time
+  def get_time
     self.time.to_time
   end
 

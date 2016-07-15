@@ -20,7 +20,7 @@ class MeetupsController < ApplicationController
     @meetup = Meetup.new(meetup_params) #need host to create
     @meetup.host = Host.create(user: current_user)
     @meetup.set_time
-    @meetup.save(validate: false)
+    @meetup.save#(validate: false)
     redirect_to meetup_path(@meetup)
   end 
 
