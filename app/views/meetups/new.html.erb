@@ -1,9 +1,11 @@
 <%= form_for @meetup do |f| %>
-  <%= f.label :date %>
-  <%= f.collection_select :date, @days, :to_date, :to_date %><br>
-  <%= f.label :time %>
-  <%= f.collection_select :time, @times, :to_s, :to_s %><br>
-  <%= f.label :location %>
+  <%= f.label :set_date %>
+  <%= f.collection_select :set_date, @days, :to_date, :to_s %><br>
+  <%= f.label :set_hour_min %>
+  <%= f.collection_select :set_hour_min, @times, :to_s, :to_s %><br> 
+  <%#= f.label :time %>
+  <%#= datetime_select(@meetup, :time, start_year: Date.today.year, discard_year: true) %><br>
+  <%= f.label :set_location %>
   <%= f.collection_select :location_id, Location.all, :id, :name %><br>
   <%= f.label :title%> 
   <%= f.text_field :title %><br>
@@ -11,3 +13,4 @@
   <%= f.text_area :description %><br>
   <%= f.submit "Create Meetup" %> 
 <%end%>
+

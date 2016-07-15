@@ -12,14 +12,15 @@ class MeetupsController < ApplicationController
 
   def new 
     @meetup = Meetup.new
-    @days = Meetup.days
-    @times = Meetup.times
+    @days = Meetup.date_range
+    @times = Meetup.time_range
   end 
   
   def create 
     @meetup = Meetup.new(meetup_params) #need host to create
     @meetup.host = Host.create(user: current_user)
-    @meetup.save
+    @meetup.set_time
+    @meetup.save#(validate: false)
     redirect_to meetup_path(@meetup)
   end 
 
@@ -58,7 +59,7 @@ class MeetupsController < ApplicationController
 private
 
   def meetup_params
-    params.require(:meetup).permit(:title, :date, :time, :location_id, :description)
+    params.require(:meetup).permit(:title, :set_date, :set_hour_min, :location_id, :description)
   end
 
   # def meetup_id 
