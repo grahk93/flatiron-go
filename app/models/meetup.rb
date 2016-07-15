@@ -19,6 +19,11 @@ class Meetup < ApplicationRecord
 
   accepts_nested_attributes_for :location
 
+  # search method
+  def self.search(search)
+    where("title LIKE ? OR description LIKE ?", "%#{search}%", "%#{search}%")
+  end
+
   # class methods
   def self.times(range=(9..18))
     range.each_with_object([]) do |time, array|

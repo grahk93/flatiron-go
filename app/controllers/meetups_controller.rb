@@ -1,7 +1,11 @@
 class MeetupsController < ApplicationController
   def index 
     @user = current_user
-    @meetups = Meetup.all
+    if params[:search]
+      @meetups = Meetup.search(params[:search])
+    else
+      @meetups = Meetup.all
+    end
   end 
 
   def new 
@@ -18,9 +22,9 @@ class MeetupsController < ApplicationController
   end 
 
   def show 
-    @todaymeetups = Meetup.today
     @user = current_user
     @meetup = Meetup.find(params[:id])
+    byebug
   end 
 
   def edit  

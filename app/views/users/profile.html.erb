@@ -1,5 +1,11 @@
 <%= link_to "Meetup Dashboard", dashboard_path %> 
 <%= link_to "Logout", logout_path, method: :delete %> 
+<%= form_tag meetups_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
 
 <h3>Profile</h3>
 User Name: <%= @user.user_name %> <br>
@@ -25,7 +31,9 @@ Meetups I've been to <br>
 </ul>
 
 <% if admin? %>
+<p> Admin Panel </p>
 <ul>
+<li><%= button_to 'View All Users', users_path, method: 'get' %></li>
 <li><%= button_to 'New Cohort', new_cohort_path, method: 'get' %></li>
 <li><%= button_to 'New Location', new_location_path, method: 'get' %></li>
 </ul>

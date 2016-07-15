@@ -8,8 +8,11 @@
 Title: <%= @meetup.title %> <br>
 Host: <%= @meetup.host.name %> <br>
 Attendants: <% @meetup.attendants.each do |attendant| %>
-   <%= attendant.name %>
+   <%= attendant.name %>,  
 <%end%>
+<br>
+Description: <%= @meetup.description %>
+
 
 <%= button_to 'Join Meetup', join_meetup_path, method: 'post' %>
 <%= button_to 'Edit Meetup', edit_meetup_path, method: 'get' %>
