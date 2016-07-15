@@ -19,9 +19,12 @@ class Meetup < ApplicationRecord
 
   accepts_nested_attributes_for :location
 
-  ## class methods
+  # search method
+  def self.search(search)
+    where("title LIKE ? OR description LIKE ?", "%#{search}%", "%#{search}%")
+  end
 
-  # time methods
+  # class methods
   def self.times(range=(9..18))
     range.each_with_object([]) do |time, array|
       if time < 12
@@ -37,6 +40,7 @@ class Meetup < ApplicationRecord
     end
   end
 
+  # time methods
   def self.days(num_days=7)
     (Date.today..Date.today.advance(days: (num_days - 1))).to_a
   end
@@ -64,6 +68,10 @@ class Meetup < ApplicationRecord
   ## public methods
   def available?
     Meetup.where(location: location, date: date, time: time)[0] == nil
+  end
+
+  def today
+    Meetup.all.where(date = Date.today)
   end
 
   ## validation methods
