@@ -6,3 +6,4 @@ class Host < ApplicationRecord
   end
   
 end
+

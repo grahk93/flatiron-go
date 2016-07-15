@@ -18,26 +18,11 @@ class Meetup < ApplicationRecord
     Meetup.all.select do |m|
       m.date.cweek == Date.today.cweek
     end
+    #should get rid of ones that have already happened this week
   end
 
-  def by_cohort
+  def self.by_cohort
+
   end
 
-  def by_location
-  end
-
-  def by_host
-  end
-
-  def pop_location
-  end
-
-  def pop_day
-  end
-
-  def pop_time
-  end 
-
-
-end 
-
+end
