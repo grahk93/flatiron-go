@@ -5,7 +5,11 @@ class CohortsController < ApplicationController
   end
 
   def new
-    @cohort = Cohort.new
+    if admin?
+      @cohort = Cohort.new
+    else
+      redirect_to profile_path(session[:user_id])
+    end
   end
 
   def create
