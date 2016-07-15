@@ -27,8 +27,20 @@ class User < ApplicationRecord
     end
   end
 
-  def meetups_attended
-   puts "hi"
+  def meetups_to_attend #issue with proxy
+    self.meetups_attending.each do |proxy|
+      proxy.select do |meetup|
+        meetup.date > Date.today
+      end
+    end
   end
-  
+
+  def meetups_attended
+    self.meetups_attending.each do |proxy|
+      proxy.select do |meetup|
+        meetup.date < Date.today
+      end
+    end
+  end
+
 end

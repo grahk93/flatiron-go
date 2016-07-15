@@ -56,7 +56,7 @@ class Meetup < ApplicationRecord
 
   def self.this_week
     Meetup.all.select do |m|
-      m.date.cweek == Date.today.cweek
+      m.date.cweek == Date.today.cweek && m.date > Date.today
     end
     #should get rid of ones that have already happened this week
   end
