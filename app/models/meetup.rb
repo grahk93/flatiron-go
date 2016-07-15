@@ -54,12 +54,15 @@ class Meetup < ApplicationRecord
   # queries
   def self.today
     #select all meetups where a meetup has today's dates
-    Meetup.where("date = ?", Date.today)
+    # Meetup.where("date = ?", Date.today)
+    Meetup.all.to_a.select do |meetup|
+      meetup.date == Date.today
+    end
   end
 
   def self.this_week
-    Meetup.all.select do |m|
-      m.date.cweek == Date.today.cweek && m.date > Date.today
+    Meetup.all.to_a.select do |m|
+      m.date.cweek == Date.today.cweek && m.date >= Date.today
     end
     #should get rid of ones that have already happened this week
   end

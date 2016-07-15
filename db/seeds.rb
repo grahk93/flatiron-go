@@ -13,8 +13,10 @@ Meetup.destroy_all
 MeetupAttendant.destroy_all
 User.destroy_all
 
+# How many meetups do we want?
+num_meetups = Random.rand(13..16)
 # How many days should it generate from?
-num_dates = 14
+num_dates = 7
 # What time should meetups start (00-24)
 start_times = 9
 # What time should meetups end (00-24)
@@ -22,9 +24,10 @@ end_times = 19
 # How many days ago should meetups start?
 days_ago = 7
 
-
+# This sets the date range for meetups, don't alter
 meetup_days = Meetup.date_range(num_dates - 1, days_ago)
 
+# This sets the time range for meetups, don't alter
 meetup_times = Meetup.time_range(start_times..(end_times - 1))
 
 
@@ -55,8 +58,8 @@ Cohort.all.each_with_index do |cohort, i1|
 end
 
 # Create some meetups and hosts!
-Random.rand(9..13).times do |i| 
-  meetup = FactoryGirl.create(:meetup, 
+num_meetups.times do |i| 
+  meetup = FactoryGirl.build(:meetup, 
     title: "#{Faker::Hacker.verb} the #{Faker::Hacker.noun}", 
     description: Faker::Hacker.say_something_smart, 
     host: Host.find_or_create_by(
@@ -68,10 +71,22 @@ Random.rand(9..13).times do |i|
     set_date: meetup_days[Random.rand(0..(meetup_days.length - 1))],
     set_hour_min: meetup_times[Random.rand(0..(meetup_times.length - 1))] 
   )
+  meetup.set_time
+  meetup.save(validate: false)
 end
-
-#meetup_days[Random.rand(0..(meetup_days.length - 1))],
-#meetup_times[Random.rand(0..(meetup_times.length - 1))]
+# make sure at least one is today (NOT WORKING)
+FactoryGirl.build(:meetup, 
+  title: "#{Faker::Hacker.verb} the #{Faker::Hacker.noun}", 
+  description: Faker::Hacker.say_something_smart, 
+  host: Host.find_or_create_by(
+    user: User.find(
+      Random.rand(
+        (User.first.id)..(User.last.id))
+    )),
+  location_id: Random.rand((Location.first.id)..(Location.last.id)),
+  set_date: Date.today,
+  set_hour_min: "9:30 AM" 
+).set_time.save(validate: false)
 
 # Populate the meetups with attendants
 Meetup.all.each do |meetup|
