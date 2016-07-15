@@ -19,7 +19,9 @@ class Meetup < ApplicationRecord
 
   accepts_nested_attributes_for :location
 
-  # class methods
+  ## class methods
+
+  # time methods
   def self.times(range=(9..18))
     range.each_with_object([]) do |time, array|
       if time < 12
@@ -40,12 +42,36 @@ class Meetup < ApplicationRecord
   end
 
   def self.available?(location_id, date, time)
-    if Meetup.where(location_id: location_id, date: date, time: time) == nil
+    if Meetup.where(location_id: location_id, date: date, time: time)[0] == nil
       return [location_id, date, time]
     end
   end
 
-  # validation methods
+  # queries
+  def self.today
+  end
+
+  def self.this_week
+  end
+
+  def self.by_location
+  end
+
+  def self.by_host
+  end
+
+  def self.by_cohort
+  end
+
+  ## public methods
+  def available?
+    Meetup.where(location: location, date: date, time: time)[0] == nil
+  end
+
+  ## validation methods
+
+  private
+  
   def date_cannot_be_in_the_past
     errors.add(:date, "can't be in the past") if
       !date.blank? and date < Date.today  
@@ -55,35 +81,5 @@ class Meetup < ApplicationRecord
     errors.add(:time, "must be available") if 
       Meetup.where(location: location, date: date, time: time)[0] != nil
   end
-
-  # public methods
-  def available?
-    Meetup.where(location: location, date: date, time: time) == nil
-  end
-
-  def today
-  end
-
-  def this_week
-  end
-
-  def by_location
-  end
-
-  def by_host
-  end
-
-  def by_cohort
-  end
-
-  def pop_location
-  end
-
-  def pop_day
-  end
-
-  def pop_time
-  end 
-
 
 end 
