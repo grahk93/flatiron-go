@@ -41,6 +41,7 @@ class Meetup < ApplicationRecord
     (Date.today..Date.today.advance(days: (num_days - 1))).to_a
   end
 
+
   def self.available?(location_id, date, time)
     if Meetup.where(location_id: location_id, date: date, time: time)[0] == nil
       return [location_id, date, time]
@@ -49,18 +50,15 @@ class Meetup < ApplicationRecord
 
   # queries
   def self.today
+    #select all meetups where a meetup has today's dates
+    Meetup.where("date = ?", Date.today)
   end
 
   def self.this_week
-  end
-
-  def self.by_location
-  end
-
-  def self.by_host
-  end
-
-  def self.by_cohort
+    Meetup.all.select do |m|
+      m.date.cweek == Date.today.cweek
+    end
+    #should get rid of ones that have already happened this week
   end
 
   ## public methods
@@ -83,3 +81,4 @@ class Meetup < ApplicationRecord
   end
 
 end 
+

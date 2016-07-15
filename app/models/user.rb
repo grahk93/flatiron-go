@@ -3,11 +3,11 @@ class User < ApplicationRecord
   validates :password, length: { in: 6..20 }, allow_nil: true
   validates :email, presence: true, uniqueness: true, format: { with: /@flatironschool.com/, message: "must be a Flatiron School email" }
   validate :email_valid?
-
   has_secure_password
+
   belongs_to :cohort
-  has_one :attendant
-  has_one :host
+  has_many :hosts
+  has_many :attendants
   accepts_nested_attributes_for :cohort
 
   def email_valid?
