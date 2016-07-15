@@ -6,10 +6,6 @@ class Host < ApplicationRecord
   def name
     self.user.name
   end
-  
-  def cohort
-    self.user.cohort
-  end
 
 end
 

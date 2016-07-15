@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   belongs_to :cohort
   has_many :hosts
+  has_many :meetups, through: :hosts
   has_many :attendants
   accepts_nested_attributes_for :cohort
 
@@ -17,18 +18,17 @@ class User < ApplicationRecord
   end
 
   def meetups_hosting
-    
+    self.meetups
   end
 
   def meetups_attending
-    
+    self.attendants.all.map do |a|
+      a.meetups
+    end
   end
 
   def meetups_attended
-
+   puts "hi"
   end
   
-  def all_attendees
-
-  end
 end
