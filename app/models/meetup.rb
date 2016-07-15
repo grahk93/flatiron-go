@@ -21,8 +21,4 @@ class Meetup < ApplicationRecord
     #should get rid of ones that have already happened this week
   end
 
-  def self.by_cohort
-
-  end
-
 end
