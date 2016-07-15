@@ -62,6 +62,7 @@ class Meetup < ApplicationRecord
   end
 
   def today
+    Meetup.all.where(date = Date.today)
   end
 
   def this_week
