@@ -25,7 +25,6 @@ Bio: <%= @user.bio %> <br>
 <ul>
   <% @user.meetups_attended.each do |proxy|%>
      <% proxy.each do |meetup| %>
-     <%byebug%>
       <%= link_to meetup.title, meetup_path(meetup) %>
   <%end%>
 <%end%>
