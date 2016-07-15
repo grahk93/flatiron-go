@@ -66,19 +66,15 @@ class Meetup < ApplicationRecord
 
   ## public methods
 
-<<<<<<< HEAD
   def set_time
     date_info = self.set_date.to_date
     time_info = self.set_hour_min.to_time
     self.time = Time.new(date_info.year, date_info.month, date_info.day, time_info.hour, time_info.min)
   end
-=======
+
   def today
     Meetup.all.where(date = Date.today)
   end
-
-  ## validation methods
->>>>>>> 5d72b67b7732c80f7c08a640361a8b6a4043bedb
 
   def time
     self.time.to_time
