@@ -7,10 +7,11 @@ class Meetup < ApplicationRecord
   accepts_nested_attributes_for :location
 
 
-  def today
+  def self.today
+    Meetup.where("date = ?", Date.today)
   end
 
-  def this_week
+  def self.this_week
   end
 
   def by_cohort
