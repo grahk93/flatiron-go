@@ -3,11 +3,12 @@ class User < ApplicationRecord
   validates :password, length: { in: 6..20 }, allow_nil: true
   validates :email, presence: true, uniqueness: true, format: { with: /@flatironschool.com/, message: "must be a Flatiron School email" }
   validate :email_valid?
-
   has_secure_password
+
   belongs_to :cohort
-  has_one :attendant
-  has_one :host
+  has_many :hosts
+  has_many :meetups, through: :hosts
+  has_many :attendants
   accepts_nested_attributes_for :cohort
 
   def email_valid?
@@ -17,18 +18,29 @@ class User < ApplicationRecord
   end
 
   def meetups_hosting
-    
+    self.meetups
   end
 
   def meetups_attending
-    
+    self.attendants.all.map do |a|
+      a.meetups
+    end
+  end
+
+  def meetups_to_attend #issue with proxy
+    self.meetups_attending.each do |proxy|
+      proxy.select do |meetup|
+        meetup.date > Date.today
+      end
+    end
   end
 
   def meetups_attended
-
+    self.meetups_attending.each do |proxy|
+      proxy.select do |meetup|
+        meetup.date < Date.today
+      end
+    end
   end
-  
-  def all_attendees
 
-  end
 end

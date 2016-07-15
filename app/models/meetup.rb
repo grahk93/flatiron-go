@@ -18,9 +18,12 @@ class Meetup < ApplicationRecord
 
   accepts_nested_attributes_for :location
 
-  ## class methods
+  # search method
+  def self.search(search)
+    where("title LIKE ? OR description LIKE ?", "%#{search}%", "%#{search}%")
+  end
 
-  # time methods I need to replace
+  # time methods
 
   def self.date_range(num_days=7)
     (Date.today..Date.today.advance(days: (num_days - 1))).to_a
@@ -41,29 +44,41 @@ class Meetup < ApplicationRecord
     end
   end
 
+  # fix this
+  def self.available?(location_id, date, time)
+    if Meetup.where(location_id: location_id, date: date, time: time)[0] == nil
+      return [location_id, date, time]
+    end
+  end
+
   # queries
   def self.today
+    #select all meetups where a meetup has today's dates
+    Meetup.where("date = ?", Date.today)
   end
 
   def self.this_week
-  end
-
-  def self.by_location
-  end
-
-  def self.by_host
-  end
-
-  def self.by_cohort
+    Meetup.all.select do |m|
+      m.date.cweek == Date.today.cweek && m.date > Date.today
+    end
+    #should get rid of ones that have already happened this week
   end
 
   ## public methods
 
+<<<<<<< HEAD
   def set_time
     date_info = self.set_date.to_date
     time_info = self.set_hour_min.to_time
     self.time = Time.new(date_info.year, date_info.month, date_info.day, time_info.hour, time_info.min)
   end
+=======
+  def today
+    Meetup.all.where(date = Date.today)
+  end
+
+  ## validation methods
+>>>>>>> 5d72b67b7732c80f7c08a640361a8b6a4043bedb
 
   def time
     self.time.to_time
@@ -78,3 +93,4 @@ class Meetup < ApplicationRecord
   # private
   
 end 
+

@@ -1,7 +1,13 @@
 class MeetupsController < ApplicationController
+  skip_before_action :login_required, only: [:new, :create]
+
   def index 
     @user = current_user
-    @meetups = Meetup.all
+    if params[:search]
+      @meetups = Meetup.search(params[:search])
+    else
+      @meetups = Meetup.all
+    end
   end 
 
   def new 
