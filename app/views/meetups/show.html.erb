@@ -1,14 +1,10 @@
-<%= link_to "My Profile", user_path(@user) %> 
-<%= link_to "Meetup Dashboard", dashboard_path %>
-<%= link_to "All Meetups", meetups_path %>
-<%= link_to "Logout", logout_path, method: :delete %> 
 <br>
 
 
 Title: <%= @meetup.title %> <br>
 Host: <%= @meetup.host.name %> <br>
 Attendants: <% @meetup.attendants.each do |attendant| %>
-   <%= attendant.name %>,  
+   <%= attendant.user.user_name %>,  
 <%end%>
 <br>
 Description: <%= @meetup.description %>
