@@ -8,10 +8,16 @@ class Meetup < ApplicationRecord
 
 
   def self.today
+    #select all meetups where a meetup has today's dates
     Meetup.where("date = ?", Date.today)
   end
 
   def self.this_week
+    #select all meetups where a meetup's current week 
+    #is the same as today's current week 
+    Meetup.all.select do |m|
+      m.date.cweek == Date.today.cweek
+    end
   end
 
   def by_cohort
