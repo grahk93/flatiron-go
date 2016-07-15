@@ -15,5 +15,8 @@ RSpec.describe User, :type => :model do
   end
 
   #space for methods
-
+  it "can become a host" do
+    let(:host) { FactoryGirl.create(:host, user: user)}
+    expect(host.user).to eq(user)
+  end
 end
