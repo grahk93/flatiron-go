@@ -20,9 +20,9 @@ start_times = 9
 # What time should meetups end (00-24)
 end_times = 19
 
-meetup_days = Meetup.days(num_dates - 1)
+meetup_days = Meetup.date_range(num_dates - 1)
 
-meetup_times = Meetup.times(start_times..(end_times - 1))
+meetup_times = Meetup.time_range(start_times..(end_times - 1))
 
 
 # create cohorts
@@ -53,7 +53,7 @@ end
 
 # Create some meetups and hosts!
 Random.rand(9..13).times do |i| 
-  FactoryGirl.create( :meetup, 
+  meetup = Meetup.new( 
     title: "#{Faker::Hacker.verb} the #{Faker::Hacker.noun}", 
     description: Faker::Hacker.say_something_smart, 
     host: Host.find_or_create_by(
@@ -62,10 +62,15 @@ Random.rand(9..13).times do |i|
           (User.first.id)..(User.last.id))
       )),
     location_id: Random.rand((Location.first.id)..(Location.last.id)),
-    date: meetup_days[Random.rand(0..(meetup_days.length - 1))],
-    time: meetup_times[Random.rand(0..(meetup_times.length - 1))]
+    set_date: Date.today(),
+    set_hour_min: "9:30 AM" 
   )
+  meetup.set_time
+  meetup.save(validate: false)
 end
+
+#meetup_days[Random.rand(0..(meetup_days.length - 1))],
+#meetup_times[Random.rand(0..(meetup_times.length - 1))]
 
 # Populate the meetups with attendants
 Meetup.all.each do |meetup|

@@ -1,13 +1,10 @@
 class Host < ApplicationRecord
   belongs_to :user
   has_many :meetups
+  has_one :cohort, through: :user
   
   def name
     self.user.name
-  end
-  
-  def cohort
-    self.user.cohort
   end
 
 end

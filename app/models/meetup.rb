@@ -2,13 +2,12 @@
 # Maybe narrow down the scope of the application to drive features.
 
 class Meetup < ApplicationRecord
+  before_validation :set_time
+  attr_accessor :set_date, :set_hour_min
   validates :title, presence: true
   validates :description, presence: true
-  validates :date, presence: true
   validates :time, presence: true
   validates :location_id, presence: true
-  validate :date_cannot_be_in_the_past
-  validate :time_must_be_available
 
 
   belongs_to :host
@@ -21,8 +20,13 @@ class Meetup < ApplicationRecord
 
   ## class methods
 
-  # time methods
-  def self.times(range=(9..18))
+  # time methods I need to replace
+
+  def self.date_range(num_days=7)
+    (Date.today..Date.today.advance(days: (num_days - 1))).to_a
+  end
+
+  def self.time_range(range=(9..18))
     range.each_with_object([]) do |time, array|
       if time < 12
         array << "#{time}:00 AM"
@@ -34,16 +38,6 @@ class Meetup < ApplicationRecord
         array << "#{time}:00 PM"
         array << "#{time}:30 PM"
       end
-    end
-  end
-
-  def self.days(num_days=7)
-    (Date.today..Date.today.advance(days: (num_days - 1))).to_a
-  end
-
-  def self.available?(location_id, date, time)
-    if Meetup.where(location_id: location_id, date: date, time: time)[0] == nil
-      return [location_id, date, time]
     end
   end
 
@@ -64,22 +58,23 @@ class Meetup < ApplicationRecord
   end
 
   ## public methods
-  def available?
-    Meetup.where(location: location, date: date, time: time)[0] == nil
+
+  def set_time
+    date_info = self.set_date.to_date
+    time_info = self.set_hour_min.to_time
+    self.time = Time.new(date_info.year, date_info.month, date_info.day, time_info.hour, time_info.min)
+  end
+
+  def time
+    self.time.to_time
+  end
+
+  def date
+    self.time.to_date
   end
 
   ## validation methods
 
-  private
+  # private
   
-  def date_cannot_be_in_the_past
-    errors.add(:date, "can't be in the past") if
-      !date.blank? and date < Date.today  
-  end
-
-  def time_must_be_available
-    errors.add(:time, "must be available") if 
-      Meetup.where(location: location, date: date, time: time)[0] != nil
-  end
-
 end 

@@ -44,8 +44,7 @@ ActiveRecord::Schema.define(version: 20160714180530) do
   end
 
   create_table "meetups", force: :cascade do |t|
-    t.date     "date"
-    t.time     "time"
+    t.string   "time"
     t.text     "description"
     t.integer  "location_id"
     t.integer  "host_id"
