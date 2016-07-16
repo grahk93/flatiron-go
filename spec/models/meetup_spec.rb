@@ -20,6 +20,13 @@ RSpec.describe Meetup, :type => :model do
     expect(meetup.host.name).to eq(user.name)
   end
 
-  #space for methods
+  describe ".today" do 
+    it "returns all meetups scheduled for current day" do
+      #class method tests??
+    end
 
+  describe ".this_week" do 
+    it "returns all meetups scheduled for current week" do
+    end
 end
+

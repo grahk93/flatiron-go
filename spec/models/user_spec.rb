@@ -12,9 +12,31 @@ RSpec.describe User, :type => :model do
     expect(user.cohort).to eq(cohort)
   end
 
-  let(:host) { Host.create(user: user)}
+  it "is not an admin" do
+    expect(user.admin).to eq(false)
+  end
 
+  #space for methods
   it "can become a host" do
     expect(host.user).to eq(user)
   end
+
+  describe "#meetups_hosting" do #works? 
+    let (:host) {FactoryGirl.create(:host, user: user)}
+    let(:meetup) {FactoryGirl.create(:meetup, host: host)}
+    it 'returns the meetups user is hosting' do
+      binding.pry
+      expect(meetup.host).to eq(host)
+    end
+  end
+
+  describe "#meetups_hosting" do #this is just wrong
+    let (:attendant) {FactoryGirl.create(:attendant, user: user)}
+    let(:meetup_attendant) {FactoryGirl.create(:meetup_attendant, attendant: attendant)}
+    it 'returns the meetups user attends' do
+      expect(meetup.attendants).to eq(attendant)
+    end
+  end
+
 end
+  

@@ -12,16 +12,34 @@ Bio: <%= @user.bio %> <br>
 </ul>
 <br>
 
-Meetups I'm hosting <br>
-Meetups I'm attending <br>
-Meetups I've been to <br> 
+<h5> Meetups <%= @user.user_name %> is hosting: </h5> 
+<ul>
+<% @user.meetups.each do |meetup| %>
+  <%= link_to meetup.title, meetup_path(meetup) %><br>
+<%end%>
+</ul> <br>
+<h5> Meetups <%= @user.user_name %> is attending: </h5>
+<ul> 
+  <% @user.meetups_to_attend.each do |proxy|%>
+     <% proxy.each do |meetup| %>
+      <%= link_to meetup.title, meetup_path(meetup) %><br>
+  <%end%>
+<%end%></ul><br>
+<h5> Meetups <%= @user.user_name %> has attended: </h5> 
+<ul>
+  <% @user.meetups_attended.each do |proxy|%>
+     <% proxy.each do |meetup| %>
+      <%= link_to meetup.title, meetup_path(meetup) %><br>
+  <%end%>
+<%end%>
+</ul>
 
 <ul>
 <li><%= button_to 'All Cohorts', cohorts_path, method: 'get' %></li>
 <li><%= button_to 'All Locations', locations_path, method: 'get' %></li>
 </ul>
 
-<% if admin? %>
+<% if @user.is_admin? %>
 <p> Admin Panel </p>
 <ul>
 <li><%= button_to 'View All Users', users_path, method: 'get' %></li>

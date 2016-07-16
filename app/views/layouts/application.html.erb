@@ -17,7 +17,7 @@
       <li> <%= link_to "Logout", logout_path, method: :delete %> </li>
       <li> <%= form_tag meetups_path, :method => 'get' do %>
               <%= text_field_tag :search, params[:search] %>
-              <%= submit_tag "Search", :name => nil %>
+              <%= submit_tag "Search Meetup", :name => nil %>
             <% end %> </li>
       <% else %>
       <li> <%= link_to "Sign Up", signup_path %> </li>
