@@ -35,7 +35,7 @@ class User < ApplicationRecord
     end
   end
 
-  def meetups_attended
+  def meetups_attended #issue because all events are ranged starting from today in the seed 
     self.meetups_attending.each do |proxy|
       proxy.select do |meetup|
         meetup.date < Date.today

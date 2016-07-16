@@ -1,5 +1,9 @@
 <h2><%= @cohort.name %></h2>
-<br>
+<h5><%= @cohort.name%> Meetups:</h5>
+<% @cohort.meetups.each do |meetup| %>
+  <%= link_to meetup.title, meetup_path(meetup) %> <br>
+<% end %>
+<h5><%= @cohort.name%> Members</h5>
 <% @users.each do |user| %>
   <%= link_to user.user_name, user_path(user) %> <br>
 <% end %>

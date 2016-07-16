@@ -1,19 +1,33 @@
 <br>
 
 <h3> Meetup Dashboard</h3>
-  
-<h4>Today's meetups </h4>
-  
-<h4>This weeks meetups </h4>
 
-Meetups by cohort 
+<h5>Today's meetups:</h5>
 
-Meetups by location
+<% Meetup.today.each do |meetup|%>
+<ul>
+ <%= link_to meetup.title, meetup_path(meetup) %>,
+ <%= meetup.time %>,
+ <%= meetup.location.name %>
+</ul>
+<%end%>
 
-Meetup by host 
 
-Most popular meetup location 
+<br>
+<h5>This Weeks's meetups:</h5>
+<% Meetup.this_week.each do |meetup|%>
+<ul>
+ <%= link_to meetup.title, meetup_path(meetup) %>,
+ <%= meetup.time %>,
+ <%= meetup.location.name %>
+</ul>
+<%end%>
 
-Most popular meetup day
+<h5>Meetups by cohort:</h5>
+  <%Cohort.all.each do |cohort|%>
+    <h5><%=cohort.name%>:</h5>
+    <% cohort.meetups.each do |meetup| %>
+      <%= link_to meetup.title, meetup_path(meetup) %> <br>
+    <% end %>
+  <% end %>
 
-Most popular meet up time  
