@@ -75,7 +75,7 @@ num_meetups.times do |i|
   meetup.save(validate: false)
 end
 # make sure at least one is today (NOT WORKING)
-FactoryGirl.build(:meetup, 
+today_meetup = FactoryGirl.build(:meetup, 
   title: "#{Faker::Hacker.verb} the #{Faker::Hacker.noun}", 
   description: Faker::Hacker.say_something_smart, 
   host: Host.find_or_create_by(
@@ -86,12 +86,14 @@ FactoryGirl.build(:meetup,
   location_id: Random.rand((Location.first.id)..(Location.last.id)),
   set_date: Date.today,
   set_hour_min: "9:30 AM" 
-).set_time.save(validate: false)
+)
+today_meetup.set_time
+today_meetup.save(validate: false)
 
 # Populate the meetups with attendants
 Meetup.all.each do |meetup|
   meetup.host.cohort.users.each do |attendee|
-    if Random.rand(0..10) > 7
+    if Random.rand(0..10) > 6
       MeetupAttendant.create(meetup: meetup, attendant: Attendant.find_or_create_by(user: attendee)) unless attendee == meetup.host.user
     end
   end
