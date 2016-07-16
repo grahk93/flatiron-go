@@ -1,17 +1,20 @@
+<%= flash[:join] %>
+<%= flash[:edit] %>
 <br>
 
 
 Title: <%= @meetup.title %> <br>
-Host: <%= @meetup.host.name %> <br>
+Host: <%= @meetup.host.user.user_name %> <br>
 Attendants: <% @meetup.attendants.each do |attendant| %>
-   <%= attendant.user.user_name %>,  
+   <%= attendant.user.user_name %><%= ',' if attendant != @meetup.attendants.last %>
 <%end%>
 <br>
 Description: <%= @meetup.description %>
 
 
 <%= button_to 'Join Meetup', join_meetup_path, method: 'post' %>
+<% if host?(@meetup) %>
 <%= button_to 'Edit Meetup', edit_meetup_path, method: 'get' %>
-
+<% end %>
 <!-- When join meetup button is clicked, 
 the meetup currently shown must be associated with the current user  -->
