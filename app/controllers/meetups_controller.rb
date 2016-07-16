@@ -1,5 +1,6 @@
 class MeetupsController < ApplicationController
   skip_before_action :login_required, only: [:new, :create]
+  helper_method :host?
 
   def index 
     @user = current_user
@@ -63,6 +64,10 @@ class MeetupsController < ApplicationController
       render 'meetups/show'
     end
   end 
+
+  def host?(meetup)
+    meetup.host.user_id == session[:user_id]
+  end
 
 private
 
