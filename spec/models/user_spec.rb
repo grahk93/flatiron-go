@@ -14,6 +14,10 @@ RSpec.describe User, :type => :model do
     expect(user.cohort).to eq(cohort)
   end
 
+  it "is not an admin" do
+    expect(user.admin).to eq(false)
+  end
+
   #space for methods
   it "can become a host" do
     let(:host) { FactoryGirl.create(:host, user: user)}
@@ -38,3 +42,4 @@ RSpec.describe User, :type => :model do
   end
 
 end
+  

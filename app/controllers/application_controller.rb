@@ -7,10 +7,6 @@ class ApplicationController < ActionController::Base
     User.find(session[:user_id]) if session[:user_id]
   end
 
-  def admin?
-    User.find(session[:user_id]).admin
-  end
-
   def login(user)
     session[:user_id] = @user.id 
   end

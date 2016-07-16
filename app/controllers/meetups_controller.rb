@@ -1,6 +1,5 @@
 class MeetupsController < ApplicationController
   skip_before_action :login_required, only: [:new, :create]
-  helper_method :host?
 
   def index 
     @user = current_user
@@ -51,7 +50,10 @@ class MeetupsController < ApplicationController
 
   def join #add current user to current meetup
     @meetup = Meetup.find(params[:id]) #current meetup
-    if @meetup.attendants.pluck('user_id').include?(session[:user_id])
+    if @meetup.is_host?(current_user)
+      flash.now[:join] = 'You cannot join because you are the host!'
+      render 'meetups/show'
+    elsif @meetup.already_joined?(current_user)
       flash.now[:join] = 'You have already joined this meetup!'
       render 'meetups/show'
     else
@@ -61,10 +63,6 @@ class MeetupsController < ApplicationController
       render 'meetups/show'
     end
   end 
-
-  def host?(meetup)
-    meetup.host.user_id == session[:user_id]
-  end
 
 private
 
