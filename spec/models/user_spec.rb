@@ -29,4 +29,12 @@ RSpec.describe User, :type => :model do
     end
   end
 
+  describe "#meetups_hosting" do #this is just wrong
+    let (:attendant) {FactoryGirl.create(:attendant, user: user)}
+    let(:meetup_attendant) {FactoryGirl.create(:meetup_attendant, attendant: attendant)}
+    it 'returns the meetups user attends' do
+      expect(meetup.attendants).to eq(attendant)
+    end
+  end
+
 end
