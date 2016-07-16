@@ -1,5 +1,6 @@
 class MeetupsController < ApplicationController
   skip_before_action :login_required, only: [:new, :create]
+  helper_method :host?
 
   def index 
     @user = current_user
@@ -48,13 +49,22 @@ class MeetupsController < ApplicationController
     @user = current_user
   end
 
-  def join
-     #add current user to current meetup
+  def join #add current user to current meetup
     @meetup = Meetup.find(params[:id]) #current meetup
-    @attendant = Attendant.find_or_create_by(user: current_user) #current attendant/user
-    MeetupAttendant.create(meetup: @meetup, attendant: @attendant) #assign meetup to attendant and vice versa
-    redirect_to meetup_path(@meetup) #show that meetup
+    if @meetup.attendants.pluck('user_id').include?(session[:user_id])
+      flash.now[:join] = 'You have already joined this meetup!'
+      render 'meetups/show'
+    else
+      @attendant = Attendant.find_or_create_by(user: current_user) #current attendant/user
+      MeetupAttendant.create(meetup: @meetup, attendant: @attendant) #assign meetup to attendant and vice versa
+      flash.now[:join] = 'You joined this meetup!'
+      render 'meetups/show'
+    end
   end 
+
+  def host?(meetup)
+    meetup.host.user_id == session[:user_id]
+  end
 
 private
 
