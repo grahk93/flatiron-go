@@ -19,4 +19,14 @@ RSpec.describe User, :type => :model do
     let(:host) { FactoryGirl.create(:host, user: user)}
     expect(host.user).to eq(user)
   end
+
+  describe "#meetups_hosting" do #works? 
+    let (:host) {FactoryGirl.create(:host, user: user)}
+    let(:meetup) {FactoryGirl.create(:meetup, host: host)}
+    it 'returns the meetups user is hosting' do
+      binding.pry
+      expect(meetup.host).to eq(host)
+    end
+  end
+
 end
