@@ -6,7 +6,7 @@ class LocationsController < ApplicationController
   end
 
   def new
-    if admin?
+    if current_user.is_admin?
       @location = Location.new
     else
       redirect_to profile_path(session[:user_id])
