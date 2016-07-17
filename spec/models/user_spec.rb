@@ -49,7 +49,7 @@ RSpec.describe User, :type => :model do
     end
   end
 
-  describe "#meetups_hosting" do
+  describe "#meetups_attending" do
     let(:attendant) { Attendant.create(user: user) }
     let(:host) { Host.create(user: FactoryGirl.create(:user, cohort: cohort, email: "host@flatironschool.com", user_name: "host")) }
     let(:meetup) { FactoryGirl.create(:meetup, host: host, location: FactoryGirl.create(:location))}
