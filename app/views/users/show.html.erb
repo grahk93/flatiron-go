@@ -11,21 +11,21 @@ Bio: <%= @user.bio %> <br>
 <h5> Meetups <%= @user.user_name %> is hosting: </h5> 
 <ul>
 <% @user.meetups.each do |meetup| %>
-  <%= link_to meetup.title, meetup_path(meetup) %>
+  <%= link_to meetup.title, meetup_path(meetup) %><br>
 <%end%>
 </ul> <br>
 <h5> Meetups <%= @user.user_name %> is attending: </h5>
 <ul> 
   <% @user.meetups_to_attend.each do |proxy|%>
      <% proxy.each do |meetup| %>
-      <%= link_to meetup.title, meetup_path(meetup) %>
+      <%= link_to meetup.title, meetup_path(meetup) %><br>
   <%end%>
 <%end%></ul><br>
 <h5> Meetups <%= @user.user_name %> has attended: </h5> 
 <ul>
   <% @user.meetups_attended.each do |proxy|%>
      <% proxy.each do |meetup| %>
-      <%= link_to meetup.title, meetup_path(meetup) %>
+      <%= link_to meetup.title, meetup_path(meetup) %><br>
   <%end%>
 <%end%>
 </ul>

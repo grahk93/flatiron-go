@@ -2,39 +2,64 @@ require 'rails_helper'
 
 RSpec.describe User, :type => :model do 
   let(:cohort) { FactoryGirl.create(:cohort) }
-
   let(:user) { FactoryGirl.create(:user, cohort_id: cohort.id) }
+  let(:admin) { FactoryGirl.create(:user, 
+    cohort_id: cohort.id, 
+    user_name: "admin", 
+    email: 'admin@flatironschool.com', 
+    admin: true
+  )}
 
-  #basics
-  it "is valid" do 
+  it "is valid with a cohort, user_name, email, and password" do
     expect(user).to be_valid
   end
 
+  it "is not valid without a password" do
+    expect(User.new(user_name: "Name")).not_to be_valid
+  end
+
+  it "is not valid without a Flatiron School email" do
+    expect(FactoryGirl.build(:user, email: "user@gmail.com")).not_to be_valid
+  end
+
+  it "is valid with an admin boolean" do
+    expect(admin).to be_valid
+  end
+
+  it "defaults to admin => false" do
+    expect(user.admin).to eq(false)
+  end
+ 
   it "has a cohort" do 
     expect(user.cohort).to eq(cohort)
   end
 
-  #space for methods
-  it "can become a host" do
-    let(:host) { FactoryGirl.create(:host, user: user)}
-    expect(host.user).to eq(user)
+  describe "#meetups_hosting" do
+    let(:host) { Host.create(user: user) }
+    it "can become a host" do
+      expect(host.user).to eq(user)
+    end
   end
 
-  describe "#meetups_hosting" do #works? 
-    let (:host) {FactoryGirl.create(:host, user: user)}
-    let(:meetup) {FactoryGirl.create(:meetup, host: host)}
-    it 'returns the meetups user is hosting' do
-      binding.pry
+  describe "#meetups_hosting" do
+    let(:host) { Host.create(user: user) }
+    let(:meetup) { FactoryGirl.create(:meetup, host: host, location: FactoryGirl.create(:location)) }
+    it "can host a meetup" do
       expect(meetup.host).to eq(host)
     end
   end
 
-  describe "#meetups_hosting" do #this is just wrong
-    let (:attendant) {FactoryGirl.create(:attendant, user: user)}
-    let(:meetup_attendant) {FactoryGirl.create(:meetup_attendant, attendant: attendant)}
-    it 'returns the meetups user attends' do
-      expect(meetup.attendants).to eq(attendant)
+  describe "#meetups_hosting" do
+    let(:attendant) { Attendant.create(user: user) }
+    let(:host) { Host.create(user: FactoryGirl.create(:user, cohort: cohort, email: "host@flatironschool.com", user_name: "host")) }
+    let(:meetup) { FactoryGirl.create(:meetup, host: host, location: FactoryGirl.create(:location))}
+    let(:meetup_attendant) { MeetupAttendant.create(attendant: attendant, meetup: meetup) }
+    it "can attend meetups" do
+      expect(meetup_attendant.attendant).to eq(attendant)
+      expect(meetup_attendant.meetup).to eq(meetup)
+      expect(meetup.attendants.first).to eq(attendant)
     end
   end
 
 end
+  

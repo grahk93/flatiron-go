@@ -48,12 +48,20 @@ class MeetupsController < ApplicationController
     @user = current_user
   end
 
-  def join
-     #add current user to current meetup
+  def join #add current user to current meetup
     @meetup = Meetup.find(params[:id]) #current meetup
-    @attendant = Attendant.find_or_create_by(user: current_user) #current attendant/user
-    MeetupAttendant.create(meetup: @meetup, attendant: @attendant) #assign meetup to attendant and vice versa
-    redirect_to meetup_path(@meetup) #show that meetup
+    if @meetup.is_host?(current_user)
+      flash.now[:join] = 'You cannot join because you are the host!'
+      render 'meetups/show'
+    elsif @meetup.already_joined?(current_user)
+      flash.now[:join] = 'You have already joined this meetup!'
+      render 'meetups/show'
+    else
+      @attendant = Attendant.find_or_create_by(user: current_user) #current attendant/user
+      MeetupAttendant.create(meetup: @meetup, attendant: @attendant) #assign meetup to attendant and vice versa
+      flash.now[:join] = 'You joined this meetup!'
+      render 'meetups/show'
+    end
   end 
 
 private

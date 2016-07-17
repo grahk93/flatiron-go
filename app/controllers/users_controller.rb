@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
   skip_before_action :login_required, only: [:new, :create]
-  helper_method :admin?
 
   def index
-    if admin?
+    if current_user.is_admin?
       @users = User.all
     elsif session[:user_id] != nil
       redirect_to dashboard_path(session[:user_id])

@@ -23,6 +23,16 @@ class Meetup < ApplicationRecord
     where("title LIKE ? OR description LIKE ?", "%#{search}%", "%#{search}%")
   end
 
+  # join/edit methods
+
+  def already_joined?(user)
+    self.attendants.pluck('user_id').include?(user.id)
+  end
+
+  def is_host?(user)
+    self.host.user_id == user.id
+  end
+
   # time methods
 
   def self.date_range(num_days=7, days_ago=0)

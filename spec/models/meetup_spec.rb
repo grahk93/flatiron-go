@@ -4,6 +4,7 @@ RSpec.describe Meetup, :type => :model do
   let(:cohort) { FactoryGirl.create(:cohort) }
   let(:user) { FactoryGirl.create(:user, cohort: cohort) }
   let(:location) { FactoryGirl.create(:location) }
+
   let(:meetup) { FactoryGirl.build(:meetup, location: location, host: Host.create(user: user)) }
 
   #basics
@@ -23,8 +24,11 @@ RSpec.describe Meetup, :type => :model do
     it "returns all meetups scheduled for current day" do
       #class method tests??
     end
+  end
 
   describe ".this_week" do 
     it "returns all meetups scheduled for current week" do
     end
+  end
 end
+

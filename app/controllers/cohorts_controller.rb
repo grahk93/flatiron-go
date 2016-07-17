@@ -6,7 +6,7 @@ class CohortsController < ApplicationController
   end
 
   def new
-    if admin?
+    if current_user.is_admin?
       @cohort = Cohort.new
     else
       redirect_to profile_path(session[:user_id])
