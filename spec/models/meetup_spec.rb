@@ -20,15 +20,21 @@ RSpec.describe Meetup, :type => :model do
     expect(meetup.host.name).to eq(user.name)
   end
 
-  describe ".today" do 
-    it "returns all meetups scheduled for current day" do
-      #class method tests??
+ 
+    before do #have to provide a mini database for class method testing
+      FactoryGirl.create(:meetup)
+      FactoryGirl.create(:meetup, set_date: Date.tomorrow)
+      FactoryGirl.create(:meetup, set_date: (Date.today + 8))
     end
-  end
+    describe ".today" do 
+      it "returns all meetups scheduled for current day" do
+        expect(Meetup.today).to eq(Meetup.first)
+      end
+    end
+    describe ".this_week" do 
+      it "returns all meetups scheduled for current week" do
+        expect(Meetup.this_week).to eq([Meetup.all[0], Meetup.all[1]])
+      end
+    end
 
-  describe ".this_week" do 
-    it "returns all meetups scheduled for current week" do
-    end
-  end
-end
 
