@@ -24,9 +24,11 @@ RSpec.describe Meetup, :type => :model do
     it "returns all meetups scheduled for current day" do
       #class method tests??
     end
+  end
 
   describe ".this_week" do 
     it "returns all meetups scheduled for current week" do
     end
+  end
 end
 
