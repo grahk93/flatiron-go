@@ -35,8 +35,10 @@ class Meetup < ApplicationRecord
 
   # time methods
 
-  def self.date_range(num_days=7, days_ago=0)
-    (((days_ago.days.ago).to_date)..((days_ago.days.ago).to_date.advance(days: (num_days - 1)))).to_a
+  def self.date_range(num_days=7, days_ago=0, time_zone='Eastern Time (US & Canada)')
+    Time.zone = time_zone
+    first_day = Time.zone.parse(days_ago.days.ago.to_s).to_date
+    (first_day..(first_day.advance(days: (num_days-1)))).to_a
   end
 
   def self.time_range(range=(9..18))
@@ -80,9 +82,17 @@ class Meetup < ApplicationRecord
   ## public methods
 
   def set_time
-    date_info = self.set_date.to_date
-    time_info = self.set_hour_min.to_time
-    self.time = Time.new(date_info.year, date_info.month, date_info.day, time_info.hour, time_info.min)
+    if self.time == nil
+      date_info = self.set_date.to_date
+      time_info = self.set_hour_min.to_time
+      self.time = Time.new(
+        date_info.year,
+        date_info.month, 
+        date_info.day, 
+        time_info.hour, 
+        time_info.min
+      ) 
+    end
   end
 
   def get_time
