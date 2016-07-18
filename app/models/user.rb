@@ -28,7 +28,6 @@ class User < ApplicationRecord
   end
 
   def meetups_to_attend #issue with proxy
-    byebug
     self.meetups_attending.each do |proxy|
       proxy.select do |meetup|
         meetup.date > Date.today
