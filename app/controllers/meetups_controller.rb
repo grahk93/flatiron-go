@@ -71,7 +71,10 @@ class MeetupsController < ApplicationController
 
   def create_invite
     @meetup = Meetup.find(params[:id])
-
+    invite_params[:invitees].each do |user_id|
+      Invitation.create(meetup: @meetup, user_id: user_id)
+    end
+    redirect_to meetup_path(@meetup)
   end
 
 private
@@ -81,6 +84,6 @@ private
   end
 
   def invite_params
-    params.require(:meetup).permit(:invitees => [])
+    params.permit(invitees: [])
   end
 end

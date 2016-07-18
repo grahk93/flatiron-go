@@ -33,7 +33,9 @@ class Meetup < ApplicationRecord
   end
 
   def can_attend
-    self.cohort.users.to_a
+    can_attendees = self.cohort.users.to_a
+    can_attendees.delete(self.host.user)
+    can_attendees
   end
 
   def is_attending
@@ -43,13 +45,15 @@ class Meetup < ApplicationRecord
   end
 
   def not_attending
-    can_attend - is_attending
+    self.can_attend - self.is_attending
+  end
+
+  def invitees
+    self.users.to_a
   end
 
   def not_invited
-    # people who can attend, but aren't attending yet, and haven't been invited
-    # meetup.cohort.users - meetup.attendants
-    
+    self.not_attending - self.invitees
   end
 
   # time methods

@@ -1,6 +1,7 @@
-<%= form_for :meetup, :url => url_for(:controller => 'meetups', :action => 'invite') do |f| %>
+<%= form_for @meetup, :url => url_for(:controller => 'meetups', :action => 'invite') do |f| %>
   <% @noninvitees.each do |noninvitee| %>
-    <%= f.label :invitee, noninvitee.name %>
-    <%= f.check_box :invitee, noninvitee.id %>
+    <%= check_box_tag 'invitees[]', noninvitee.id %>
+    <%= f.label :invitees, noninvitee.user_name %><br>
   <% end %>
+  <%= f.submit %>
 <% end %>
