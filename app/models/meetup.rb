@@ -9,14 +9,13 @@ class Meetup < ApplicationRecord
   validates :time, presence: true
   validates :location_id, presence: true
 
-
   belongs_to :host
   has_one :cohort, through: :host
   belongs_to :location
   has_many :meetup_attendants
   has_many :attendants, through: :meetup_attendants
-
-  accepts_nested_attributes_for :location
+  has_many :invitations
+  has_many :users, through: :invitations
 
   # search method
   def self.search(search)
@@ -31,6 +30,26 @@ class Meetup < ApplicationRecord
 
   def is_host?(user)
     self.host.user_id == user.id
+  end
+
+  def can_attend
+    self.cohort.users.to_a
+  end
+
+  def is_attending
+    self.attendants.to_a.map do |attendee|
+      attendee.user 
+    end
+  end
+
+  def not_attending
+    can_attend - is_attending
+  end
+
+  def not_invited
+    # people who can attend, but aren't attending yet, and haven't been invited
+    # meetup.cohort.users - meetup.attendants
+    
   end
 
   # time methods

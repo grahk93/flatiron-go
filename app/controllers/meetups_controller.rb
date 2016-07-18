@@ -64,13 +64,23 @@ class MeetupsController < ApplicationController
     end
   end 
 
+  def invite
+    @meetup = Meetup.find(params[:id])
+    @noninvitees = @meetup.not_invited
+  end
+
+  def create_invite
+    @meetup = Meetup.find(params[:id])
+
+  end
+
 private
 
   def meetup_params
     params.require(:meetup).permit(:title, :set_date, :set_hour_min, :location_id, :description)
   end
 
-  # def meetup_id 
-  #   params.require(:meetup).permit(:id)
-  # end
+  def invite_params
+    params.require(:meetup).permit(:invitees => [])
+  end
 end

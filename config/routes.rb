@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   post '/meetups/:id' => 'meetups#join', as: 'join_meetup'
   get '/dashboard' => 'meetups#dashboard', as: 'dashboard'
   get '/meetups/:id/invite' => 'meetups#invite', as: 'invite'
+  post '/meetups/:id/invite' => 'meetups#create_invite'
 
   # CohortsController Routes
   get '/cohorts' => 'cohorts#index', as: 'cohorts'
