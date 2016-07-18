@@ -6,10 +6,9 @@ class User < ApplicationRecord
   has_secure_password
 
   belongs_to :cohort
-  has_many :hosts
-  has_many :meetups, through: :hosts
-  has_many :attendants
-  accepts_nested_attributes_for :cohort
+  has_one :host
+  has_many :meetups, through: :host
+  has_one :attendant
 
   def email_valid?
     if email.scan(/@flatironschool.com/).length > 1 || email.scan(/@/).length > 1 || email.end_with?("@flatironschool.com") == false
@@ -22,24 +21,22 @@ class User < ApplicationRecord
   end
 
   def meetups_attending
-    self.attendants.all.map do |a|
-      a.meetups
+    if self.attendant
+      self.attendant.meetups
+    else
+      []
     end
   end
 
   def meetups_to_attend #issue with proxy
-    self.meetups_attending.each do |proxy|
-      proxy.select do |meetup|
-        meetup.date > Date.today
-      end
+    self.meetups_attending.select do |meetup|
+      meetup.date >= Date.today
     end
   end
 
   def meetups_attended #issue because all events are ranged starting from today in the seed 
-    self.meetups_attending.each do |proxy|
-      proxy.select do |meetup|
-        meetup.date < Date.today
-      end
+    self.meetups_attending.select do |meetup|
+      meetup.date < Date.today
     end
   end
 
