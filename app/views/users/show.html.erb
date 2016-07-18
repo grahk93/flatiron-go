@@ -16,16 +16,13 @@ Bio: <%= @user.bio %> <br>
 </ul> <br>
 <h5> Meetups <%= @user.user_name %> is attending: </h5>
 <ul> 
-  <% @user.meetups_to_attend.each do |proxy|%>
-     <% proxy.each do |meetup| %>
-      <%= link_to meetup.title, meetup_path(meetup) %><br>
+  <% @user.meetups_to_attend.each do |meetup| %>
+    <%= link_to meetup.title, meetup_path(meetup) %><br>
   <%end%>
-<%end%></ul><br>
+</ul><br>
 <h5> Meetups <%= @user.user_name %> has attended: </h5> 
 <ul>
-  <% @user.meetups_attended.each do |proxy|%>
-     <% proxy.each do |meetup| %>
-      <%= link_to meetup.title, meetup_path(meetup) %><br>
+  <% @user.meetups_attended.each do |meetup| %>
+    <%= link_to meetup.title, meetup_path(meetup) %><br>
   <%end%>
-<%end%>
 </ul>
