@@ -5,7 +5,7 @@
 <% end %>
 <h5><%= @cohort.name%> Members</h5>
 <% @users.each do |user| %>
-  <% if user.id = session[:user_id] %>
+  <% if user.id == session[:user_id] %>
     <%= link_to user.user_name, profile_path(user) %> <br>
   <% else %>
     <%= link_to user.user_name, user_path(user) %> <br>
