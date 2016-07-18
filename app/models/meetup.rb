@@ -35,6 +35,10 @@ class Meetup < ApplicationRecord
 
   # time methods
 
+  def extract_time
+    self.time.to_time.strftime("%I:%M%p")
+  end
+
   def self.date_range(num_days=7, days_ago=0, time_zone='Eastern Time (US & Canada)')
     Time.zone = time_zone
     first_day = Time.zone.parse(days_ago.days.ago.to_s).to_date

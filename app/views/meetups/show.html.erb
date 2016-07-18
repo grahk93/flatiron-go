@@ -3,14 +3,14 @@
 
 
 Title: <%= @meetup.title %> <br>
+Date: <%= @meetup.date %> <br>
+Time: <%= @meetup.extract_time %> <br>
 Host: <%= @meetup.host.user.user_name %> <br>
 Attendants: <% @meetup.attendants.each do |attendant| %>
    <%= attendant.user.user_name %><%= ',' if attendant != @meetup.attendants.last %>
 <%end%>
 <br>
 Description: <%= @meetup.description %>
-
-<!-- ADD DATE AND TIME!!!!!! -->
 
 
 <%= button_to 'Join Meetup', join_meetup_path, method: 'post' %>
