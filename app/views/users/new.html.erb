@@ -1,3 +1,5 @@
+<div class="center-block">
+
 <%= form_for @user do |f| %>
   
   <% if @user.errors.any? %>
@@ -19,4 +21,6 @@
   <%= f.label :password %> 
   <%= f.password_field :password %><br>
   <%= f.submit "Sign Up" %> 
+
 <%end%>
+</div>
