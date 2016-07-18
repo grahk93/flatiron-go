@@ -16,8 +16,6 @@ class Meetup < ApplicationRecord
   has_many :meetup_attendants
   has_many :attendants, through: :meetup_attendants
 
-  accepts_nested_attributes_for :location
-
   # search method
   def self.search(search)
     where("title LIKE ? OR description LIKE ?", "%#{search}%", "%#{search}%")

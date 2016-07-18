@@ -9,7 +9,6 @@ class User < ApplicationRecord
   has_many :hosts
   has_many :meetups, through: :hosts
   has_many :attendants
-  accepts_nested_attributes_for :cohort
 
   def email_valid?
     if email.scan(/@flatironschool.com/).length > 1 || email.scan(/@/).length > 1 || email.end_with?("@flatironschool.com") == false
