@@ -11,7 +11,10 @@ gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
 # Add in Bootstrap
 gem 'bootstrap-sass'
-gem 'autoprefixer-rails'
+# Add Tether
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.1.0'
+end
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views

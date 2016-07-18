@@ -59,6 +59,9 @@ class MeetupsController < ApplicationController
     else
       @attendant = Attendant.find_or_create_by(user: current_user) #current attendant/user
       MeetupAttendant.create(meetup: @meetup, attendant: @attendant) #assign meetup to attendant and vice versa
+      binding.pry
+      invitation = Invitation.find_by(user: current_user)
+      Invitation.destroy(invitation.id) if invitation
       flash.now[:join] = 'You joined this meetup!'
       render 'meetups/show'
     end
