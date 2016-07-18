@@ -12,22 +12,28 @@ Bio: <%= @user.bio %> <br>
 </ul>
 <br>
 
-<h5> Meetups <%= @user.user_name %> is hosting: </h5> 
+<h5>Meetups <%= @user.user_name %> is hosting: </h5> 
 <ul>
-<% @user.meetups.each do |meetup| %>
-  <%= link_to meetup.title, meetup_path(meetup) %><br>
-<%end%>
+  <% @user.meetups.each do |meetup| %>
+    <li><%= link_to meetup.title, meetup_path(meetup) %></li>
+  <%end%>
 </ul> <br>
-<h5> Meetups <%= @user.user_name %> is attending: </h5>
+<h5>Meetups <%= @user.user_name %> is invited to: </h5>
+<ul>
+  <% @invites.each do |invite| %>
+    <li><%= link_to invite.title, meetup_path(invite) %></li>
+  <% end %>
+</ul>
+<h5>Meetups <%= @user.user_name %> is attending: </h5>
 <ul> 
   <% @user.meetups_to_attend.each do |meetup| %>
-      <%= link_to meetup.title, meetup_path(meetup) %><br>
+      <li><%= link_to meetup.title, meetup_path(meetup) %></li>
   <%end%>
 </ul><br>
-<h5> Meetups <%= @user.user_name %> has attended: </h5> 
+<h5>Meetups <%= @user.user_name %> has attended: </h5> 
 <ul>
   <% @user.meetups_attended.each do |meetup| %>
-      <%= link_to meetup.title, meetup_path(meetup) %><br>
+      <li><%= link_to meetup.title, meetup_path(meetup) %></li>
   <%end%>
 </ul>
 

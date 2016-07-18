@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_one :host
   has_many :meetups, through: :host
   has_one :attendant
+  has_many :invitations
 
   def email_valid?
     if email.scan(/@flatironschool.com/).length > 1 || email.scan(/@/).length > 1 || email.end_with?("@flatironschool.com") == false
@@ -18,6 +19,12 @@ class User < ApplicationRecord
 
   def meetups_hosting
     self.meetups
+  end
+
+  def meetups_invited
+    self.invitations.to_a.map do |invitation|
+      invitation.meetup 
+    end
   end
 
   def meetups_attending

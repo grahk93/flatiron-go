@@ -35,6 +35,7 @@ class UsersController < ApplicationController
   def profile
     if params[:id] == current_user.id.to_s 
       @user = User.find(params[:id])
+      @invites = @user.meetups_invited
     else
       redirect_to profile_path(current_user)
     end
