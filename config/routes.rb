@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   delete '/meetups/:id' => 'meetups#destroy', as: 'delete_meetup'
   post '/meetups/:id' => 'meetups#join', as: 'join_meetup'
   get '/dashboard' => 'meetups#dashboard', as: 'dashboard'
+  get '/meetups/:id/invite' => 'meetups#invite', as: 'invite'
 
   # CohortsController Routes
   get '/cohorts' => 'cohorts#index', as: 'cohorts'
