@@ -16,6 +16,7 @@ Description: <%= @meetup.description %>
 <%= button_to 'Join Meetup', join_meetup_path, method: 'post' %>
 <% if @meetup.is_host?(current_user) %>
   <%= button_to 'Edit Meetup', edit_meetup_path, method: 'get' %>
+  <%= button_to 'Invite Users', invite_path, method: 'get' %>
 <% end %>
 <!-- When join meetup button is clicked, 
 the meetup currently shown must be associated with the current user  -->
