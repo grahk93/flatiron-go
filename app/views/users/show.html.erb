@@ -1,28 +1,30 @@
-<%= link_to "Meetup Dashboard", dashboard_path %> 
-<%= link_to "Logout", logout_path, method: :delete %> 
 
-<h3>Profile</h3>
-User Name: <%= @user.user_name %> <br>
+<div class="row">
+<h3><%= @user.user_name %></h3>
 Email: <%= @user.email %> <br>
 Name: <%= @user.name %> <br>
 Cohort: <%= link_to @user.cohort.name, cohort_path(@user.cohort_id) %> <br>
 Bio: <%= @user.bio %> <br>
-
+</div>
+<div class="row">
 <h5> Meetups <%= @user.user_name %> is hosting: </h5> 
 <ul>
 <% @user.meetups.each do |meetup| %>
   <%= link_to meetup.title, meetup_path(meetup) %><br>
 <%end%>
-</ul> <br>
+</ul> </div><br>
+<div class="row">
 <h5> Meetups <%= @user.user_name %> is attending: </h5>
 <ul> 
   <% @user.meetups_to_attend.each do |meetup| %>
     <%= link_to meetup.title, meetup_path(meetup) %><br>
   <%end%>
-</ul><br>
+</ul></div><br>
+<div class="row">
 <h5> Meetups <%= @user.user_name %> has attended: </h5> 
 <ul>
   <% @user.meetups_attended.each do |meetup| %>
     <%= link_to meetup.title, meetup_path(meetup) %><br>
   <%end%>
 </ul>
+</div>
