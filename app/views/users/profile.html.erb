@@ -1,5 +1,5 @@
-<h3>Profile</h3>
-User Name: <%= @user.user_name %> <br>
+
+<h3><%= @user.user_name %></h3>
 Email: <%= @user.email %> <br>
 Name: <%= @user.name %> <br>
 Cohort: <%= link_to @user.cohort.name, cohort_path(@user.cohort_id) %> <br>

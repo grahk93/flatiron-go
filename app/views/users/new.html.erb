@@ -9,15 +9,22 @@
         <% end %>
         </ul>
   <% end %>
-
-  <%= f.label :cohort %>
-  <%= f.collection_select :cohort_id, Cohort.all, :id, :name %><br>
+  <div class="form-group">
+    <%= f.label :cohort %>
+    <%= f.collection_select :cohort_id, Cohort.all, :id, :name, class: 'form-control' %><br>
+  </div>
+  <div class="form-group">
   <%= f.label :email %> 
-  <%= f.text_field :email %><br>
+  <%= f.text_field :email, class: 'form-control' %><br>
+  </div>
+  <div class="form-group">
   <%= f.label :user_name %> 
-  <%= f.text_field :user_name %><br>
+  <%= f.text_field :user_name, class: 'form-control' %><br>
+  </div>
+  <div class="form-group">
   <%= f.label :password %> 
-  <%= f.password_field :password %><br>
+  <%= f.password_field :password, class: 'form-control' %><br>
+  </div>
   <%= f.submit "Sign Up" %> 
 
 <%end%> -->
