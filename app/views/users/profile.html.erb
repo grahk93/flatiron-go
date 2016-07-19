@@ -12,30 +12,48 @@ Bio: <%= @user.bio %> <br>
 </ul>
 <br>
 
-<h5>Meetups <%= @user.user_name %> is hosting: </h5> 
-<ul>
+<div class="row">
+<%if @user.meetups.length > 0 %>
+<h5> <%= "Meetups #{@user.user_name} is hosting:" %> </h5> 
   <% @user.meetups.each do |meetup| %>
-    <li><%= link_to meetup.title, meetup_path(meetup) %></li>
+    <ul><%= link_to meetup.title, meetup_path(meetup) %></ul>
   <%end%>
-</ul> <br>
-<h5>Meetups <%= @user.user_name %> is invited to: </h5>
-<ul>
+<% else %>
+<h5> <%= "#{@user.user_name} is not currently hosting any meetups" %></h5>
+<% end %>
+</div><br>
+<div class="row">
+<% if @invites.length > 0 %>
+  <h5> <%= "Meetups you are invited to:" %></h5>
+  <ul>
   <% @invites.each do |invite| %>
     <li><%= link_to invite.title, meetup_path(invite) %></li>
   <% end %>
-</ul>
-<h5>Meetups <%= @user.user_name %> is attending: </h5>
-<ul> 
+  </ul>
+<% else %>
+<h5> <%= "You currently have no invitations" %>
+<% end %>
+</div>
+<div class="row">
+<%if @user.meetups_to_attend.length > 0 %>
+<h5> <%= "Meetups you are attending:" %> </h5> 
   <% @user.meetups_to_attend.each do |meetup| %>
-      <li><%= link_to meetup.title, meetup_path(meetup) %></li>
+    <ul><%= link_to meetup.title, meetup_path(meetup) %></ul>
   <%end%>
-</ul><br>
-<h5>Meetups <%= @user.user_name %> has attended: </h5> 
-<ul>
+<% else %>
+  <h5> <%= "You are not currently attending any meetups" %></h5>
+<% end %>
+</div><br>
+<div class="row">
+<%if @user.meetups_attended.length > 0 %>
+  <h5> <%= "Meetups you attended:" %> </h5> 
   <% @user.meetups_attended.each do |meetup| %>
-      <li><%= link_to meetup.title, meetup_path(meetup) %></li>
+    <ul><%= link_to meetup.title, meetup_path(meetup) %></ul>
   <%end%>
-</ul>
+<% else %>
+  <h5> <%= "You have not attended any meetups" %></h5>
+<% end %>
+</div>
 
 <ul>
 <li><%= button_to 'All Cohorts', cohorts_path, method: 'get' %></li>

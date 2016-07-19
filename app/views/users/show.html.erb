@@ -7,24 +7,32 @@ Cohort: <%= link_to @user.cohort.name, cohort_path(@user.cohort_id) %> <br>
 Bio: <%= @user.bio %> <br>
 </div>
 <div class="row">
-<h5> Meetups <%= @user.user_name %> is hosting: </h5> 
-<ul>
-<% @user.meetups.each do |meetup| %>
-  <%= link_to meetup.title, meetup_path(meetup) %><br>
-<%end%>
-</ul> </div><br>
+<%if @user.meetups.length > 0 %>
+<h5> <%= "Meetups #{@user.user_name} is hosting:" %> </h5> 
+  <% @user.meetups.each do |meetup| %>
+    <ul><%= link_to meetup.title, meetup_path(meetup) %></ul>
+  <%end%>
+<% else %>
+<h5> <%= "#{@user.user_name} is not currently hosting any meetups" %></h5>
+<% end %>
+</div><br>
 <div class="row">
-<h5> Meetups <%= @user.user_name %> is attending: </h5>
-<ul> 
+<%if @user.meetups_to_attend.length > 0 %>
+<h5> <%= "Meetups #{@user.user_name} is attending:" %> </h5> 
   <% @user.meetups_to_attend.each do |meetup| %>
-    <%= link_to meetup.title, meetup_path(meetup) %><br>
+    <ul><%= link_to meetup.title, meetup_path(meetup) %></ul>
   <%end%>
-</ul></div><br>
+<% else %>
+<h5> <%= "#{@user.user_name} is not currently attending any meetups" %></h5>
+<% end %>
+</div><br>
 <div class="row">
-<h5> Meetups <%= @user.user_name %> has attended: </h5> 
-<ul>
+<%if @user.meetups_attended.length > 0 %>
+<h5> <%= "Meetups #{@user.user_name} attended:" %> </h5> 
   <% @user.meetups_attended.each do |meetup| %>
-    <%= link_to meetup.title, meetup_path(meetup) %><br>
+    <ul><%= link_to meetup.title, meetup_path(meetup) %></ul>
   <%end%>
-</ul>
+<% else %>
+<h5> <%= "#{@user.user_name} has not attended any meetups" %></h5>
+<% end %>
 </div>
