@@ -1,3 +1,10 @@
+<div class="row">
+<h3 class="col-md-offset-2 col-sm-offset-1">All Meetups</h3>
+</div>
 <% @meetups.each do |meetup| %>
-  <p> <%= link_to meetup.title, meetup_path(meetup) %> </p>
+  <div class="row">
+  <span class="col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-1"><%= link_to meetup.title, meetup_path(meetup) %></span>
+  <span class="col-md-2 col-sm-2"><%= meetup.date %></span>
+  <span class="col-md-2 col-sm-2"><%= meetup.extract_time %></span>
+  </div>
 <% end %>
