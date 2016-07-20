@@ -1,57 +1,87 @@
-<section class="pad-lg light-gray-bg">
+<div class="container">
+
   <div class="row">
-      <div class="col-sm-8 col-sm-offset-2">
-<h3><%= @user.user_name %></h3>
-Email: <%= @user.email %> <br>
-Name: <%= @user.name %> <br>
-Cohort: <%= link_to @user.cohort.name, cohort_path(@user.cohort_id) %> <br>
-Bio: <%= @user.bio %> <br>
+    <div class="col-md-5"> <!-- left column -->
+      <div class="well profile">
+        <h2><%= @user.user_name %></h2>
+        <br/>
+        <p>Email: <%= @user.email %></p> 
+        <p>Name: <%= @user.name %></p> 
+        <p>Cohort: <%= link_to @user.cohort.name, cohort_path(@user.cohort_id) %></p> 
+        <p>Bio: <%= @user.bio %></p> 
+        
+        <br/>
+        <%= button_to 'Edit Info', edit_profile_path, method: 'get', class: "btn btn-secondary btn-sm scroll" %>
+        <br/>
+      </div>
 
-<ul>
-<li><%= button_to 'Edit Info', edit_profile_path, method: 'get' %></li>
-<li><%= button_to 'New Meetup', new_meetup_path, method: 'get' %></li>
-<li><%= button_to 'All Meetups', meetups_path, method: 'get' %></li>
-</ul>
-<br>
+      <div class="well profile">
+        <p> User Panel </p>
+          <%= button_to 'View All Cohorts', cohorts_path, method: 'get', class: "btn btn-secondary btn-sm scroll" %>
+          <%= button_to 'View All Locations', locations_path, method: 'get', class: "btn btn-secondary btn-sm scroll" %>
+      </div>
 
-<h5>Meetups <%= @user.user_name %> is hosting: </h5> 
-<ul>
-  <% @user.meetups.each do |meetup| %>
-    <li><%= link_to meetup.title, meetup_path(meetup) %></li>
-  <%end%>
-</ul> <br>
-<h5>Meetups <%= @user.user_name %> is invited to: </h5>
-<ul>
-  <% @invites.each do |invite| %>
-    <li><%= link_to invite.title, meetup_path(invite) %></li>
-  <% end %>
-</ul>
-<h5>Meetups <%= @user.user_name %> is attending: </h5>
-<ul> 
-  <% @user.meetups_to_attend.each do |meetup| %>
-      <li><%= link_to meetup.title, meetup_path(meetup) %></li>
-  <%end%>
-</ul><br>
-<h5>Meetups <%= @user.user_name %> has attended: </h5> 
-<ul>
-  <% @user.meetups_attended.each do |meetup| %>
-      <li><%= link_to meetup.title, meetup_path(meetup) %></li>
-  <%end%>
-</ul>
+      <div class="well profile">
+        <% if @user.is_admin? %>
+          <p> Admin Panel </p>
+            <%= button_to 'View All Users', users_path, method: 'get', class: "btn btn-secondary btn-sm scroll" %></li>
+            <%= button_to 'Create New Cohort', new_cohort_path, method: 'get', class: "btn btn-secondary btn-sm scroll" %></li>
+            <%= button_to 'Create New Location', new_location_path, method: 'get', class: "btn btn-secondary btn-sm scroll" %>
+        <% end %>
+      </div>
+    </div> <!-- end left column -->
 
-<ul>
-<li><%= button_to 'All Cohorts', cohorts_path, method: 'get' %></li>
-<li><%= button_to 'All Locations', locations_path, method: 'get' %></li>
-</ul>
-
-<% if @user.is_admin? %>
-<p> Admin Panel </p>
-<ul>
-<li><%= button_to 'View All Users', users_path, method: 'get' %></li>
-<li><%= button_to 'New Cohort', new_cohort_path, method: 'get' %></li>
-<li><%= button_to 'New Location', new_location_path, method: 'get' %></li>
-</ul>
-<% end %>
-</div>
-</div>
-</section>
+    <div class="col-md-7"> <!-- right column -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="well">
+            <h3>Meetups you are hosting: </h3> 
+            <ul>
+              <% @user.meetups.each do |meetup| %>
+              <li><%= link_to meetup.title, meetup_path(meetup) %></li>
+              <%end%>
+            </ul> 
+            <%= button_to 'Create New Meetup', new_meetup_path, method: 'get', class: "btn btn-secondary btn-sm scroll" %>
+            <br/>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="well">
+            <h3>Meetups you are invited to: </h3>
+            <ul>
+            <% @invites.each do |invite| %>
+            <li><%= link_to invite.title, meetup_path(invite) %></li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="well">
+            <h3>Meetups you are attending: </h3>
+            <ul> 
+            <% @user.meetups_to_attend.each do |meetup| %>
+            <li><%= link_to meetup.title, meetup_path(meetup) %></li>
+            <%end%>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="well">
+            <h3>Meetups you have attended: </h3> 
+            <ul>
+              <% @user.meetups_attended.each do |meetup| %>
+              <li><%= link_to meetup.title, meetup_path(meetup) %></li>
+              <%end%>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div> <!-- end right column -->
+  </div>
+</div> <!-- container -->  

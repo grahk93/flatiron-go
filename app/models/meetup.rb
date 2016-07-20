@@ -83,7 +83,6 @@ class Meetup < ApplicationRecord
     end
   end
 
-  # fix this
   def self.available?(location_id, date, time)
     if Meetup.where(location_id: location_id, date: date, time: time)[0] == nil
       return [location_id, date, time]
@@ -103,7 +102,6 @@ class Meetup < ApplicationRecord
     Meetup.all.to_a.select do |m|
       m.date.cweek == Date.today.cweek && m.date >= Date.today
     end
-    #should get rid of ones that have already happened this week
   end
 
   ## public methods
@@ -130,9 +128,6 @@ class Meetup < ApplicationRecord
     self.time.to_date
   end
 
-  ## validation methods
 
-  # private
-  
 end 
 

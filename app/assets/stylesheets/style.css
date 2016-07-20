@@ -6,15 +6,45 @@
 
 body {
   background: url('triangular.png');
-}
-
-.navbar {
-  top: 10px;
+  padding-top: 85px;
 }
 
 h1 {
   font-size: 60px;
 }
+
+p {
+  word-wrap: break-word;
+}
+
+.navbar {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.li-navbar {
+  padding-top: 6px;
+}
+
+.li-navbar-search {
+  padding-top: 2px;
+}
+
+h1 {
+  font-size: 60px;
+}
+
+.profile {
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.profile h2 {
+  color: inherit;
+}
+
 
 .header-info {
   bottom: 15%;
@@ -27,6 +57,18 @@ h1 {
   background: #f2f2f2;
 }
 
-.glyphicon {
+.font-large {
   font-size: 3em;
+}
+
+.form-control-short {
+  height: 30px;
+}
+
+.btn-sm {
+  font-size: 10px;
+  line-height: 1.33;
+  padding: 10px 20px;
+  font-weight: 400;
+  letter-spacing: 1px;
 }
