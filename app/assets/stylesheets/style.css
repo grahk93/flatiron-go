@@ -41,10 +41,17 @@ h1 {
   padding-bottom: 30px;
 }
 
-.profile h2 {
+.profile h2, .cohort h2, .location h2, .users h2 {
   color: inherit;
 }
 
+.link-ellipsis {
+  display: block;
+  white-space: nowrap;
+  width: 25em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 .header-info {
   bottom: 15%;
@@ -71,4 +78,9 @@ h1 {
   padding: 10px 20px;
   font-weight: 400;
   letter-spacing: 1px;
+}
+
+textarea.form-control {
+  height: 150px;
+  resize: none;
 }

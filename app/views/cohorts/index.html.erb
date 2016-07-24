@@ -1,3 +1,13 @@
-<% @cohorts.all.each do |cohort| %>
-  <%= link_to cohort.name, cohort_path(cohort) %><br>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="well cohort">
+      <h2> All Cohorts </h2>
+      <br/>
+      <% @cohorts.all.each do |cohort| %>
+        <p><%= link_to cohort.name, cohort_path(cohort) %></p><br>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>

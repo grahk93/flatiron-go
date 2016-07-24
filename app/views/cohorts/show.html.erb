@@ -1,13 +1,26 @@
-<h2><%= @cohort.name %></h2>
-<h5><%= @cohort.name%> Meetups:</h5>
-<% @cohort.meetups.each do |meetup| %>
-  <%= link_to meetup.title, meetup_path(meetup) %> <br>
-<% end %>
-<h5><%= @cohort.name%> Members</h5>
-<% @users.each do |user| %>
-  <% if user.id == session[:user_id] %>
-    <%= link_to user.user_name, profile_path(user) %> <br>
-  <% else %>
-    <%= link_to user.user_name, user_path(user) %> <br>
-  <% end %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="well cohort">
+      <h2><%= @cohort.name %></h2>
+      <h3>Meetups:</h3>
+        <p>
+          <% @cohort.meetups.each do |meetup| %>
+            <%= link_to meetup.title, meetup_path(meetup) %> <br/>
+          <% end %>
+        </p>
+
+      <h3>Members:</h3>
+        <p>
+          <% @users.each do |user| %>
+            <% if user.id == session[:user_id] %>
+              <%= link_to user.user_name, profile_path(user) %> <br/>
+            <% else %>
+              <%= link_to user.user_name, user_path(user) %> <br/>
+            <% end %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

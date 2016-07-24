@@ -17,6 +17,7 @@ class Meetup < ApplicationRecord
   has_many :invitations
   has_many :users, through: :invitations
 
+
   # search method
   def self.search(search)
     where("title LIKE ? OR description LIKE ?", "%#{search}%", "%#{search}%")

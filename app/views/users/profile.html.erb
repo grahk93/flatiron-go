@@ -38,9 +38,10 @@
             <h3>Meetups you are hosting: </h3> 
             <ul>
               <% @user.meetups.each do |meetup| %>
-              <li><%= link_to meetup.title, meetup_path(meetup) %></li>
-              <%end%>
+                <li><%= link_to meetup.title, meetup_path(meetup), class: "link-ellipsis" %></li>
+              <% end %>
             </ul> 
+            <br/>
             <%= button_to 'Create New Meetup', new_meetup_path, method: 'get', class: "btn btn-secondary btn-sm scroll" %>
             <br/>
           </div>
@@ -52,7 +53,7 @@
             <h3>Meetups you are invited to: </h3>
             <ul>
             <% @invites.each do |invite| %>
-            <li><%= link_to invite.title, meetup_path(invite) %></li>
+            <li><%= link_to invite.title, meetup_path(invite), class: "link-ellipsis" %></li>
             <% end %>
             </ul>
           </div>
@@ -64,7 +65,7 @@
             <h3>Meetups you are attending: </h3>
             <ul> 
             <% @user.meetups_to_attend.each do |meetup| %>
-            <li><%= link_to meetup.title, meetup_path(meetup) %></li>
+            <li><%= link_to meetup.title, meetup_path(meetup), class: "link-ellipsis" %></li>
             <%end%>
             </ul>
           </div>
@@ -76,7 +77,7 @@
             <h3>Meetups you have attended: </h3> 
             <ul>
               <% @user.meetups_attended.each do |meetup| %>
-              <li><%= link_to meetup.title, meetup_path(meetup) %></li>
+              <li><%= link_to meetup.title, meetup_path(meetup), class: "link-ellipsis" %></li>
               <%end%>
             </ul>
           </div>
