@@ -9,10 +9,6 @@ body {
   padding-top: 85px;
 }
 
-h1 {
-  font-size: 60px;
-}
-
 p {
   word-wrap: break-word;
 }
@@ -34,6 +30,16 @@ h1 {
   font-size: 60px;
 }
 
+h3 {
+  font-size: 24px;
+  word-wrap: break-word;
+}
+
+h4 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
 .profile {
   padding-left: 30px;
   padding-right: 30px;
@@ -41,11 +47,19 @@ h1 {
   padding-bottom: 30px;
 }
 
-.profile h2, .cohort h2, .location h2, .users h2 {
+.profile h2, .cohort h2, .location h2, .users h2, .meetup h2 {
   color: inherit;
 }
 
-.link-ellipsis {
+.link-ellipsis-short {
+  display: block;
+  white-space: nowrap;
+  width: 15em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.link-ellipsis-long {
   display: block;
   white-space: nowrap;
   width: 25em;
@@ -83,4 +97,8 @@ h1 {
 textarea.form-control {
   height: 150px;
   resize: none;
+}
+
+ul {
+  list-style-type: none;
 }

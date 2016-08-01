@@ -1,12 +1,20 @@
-<div class="container-top">
-<div class="row">
-<h3 class="col-md-offset-2 col-sm-offset-1">All Meetups</h3>
-</div>
-<% @meetups.each do |meetup| %>
+<div class="container">
   <div class="row">
-  <span class="col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-1"><%= link_to meetup.title, meetup_path(meetup) %></span>
-  <span class="col-md-2 col-sm-2"><%= meetup.date %></span>
-  <span class="col-md-2 col-sm-2"><%= meetup.extract_time %></span>
+    <div class="col-md-8 col-md-offset-2">
+      <div class="well meetup">
+        <h2> All Meetups </h2>
+        <% @meetups.each do |meetup| %>
+          <div class="row">
+            <p>
+            <div class="col-md-12">
+              <div class="col-md-6 col-sm-4"><%= link_to meetup.title, meetup_path(meetup), class: "link-ellipsis-short" %></div>
+              <div class="col-md-4 col-sm-4"><%= meetup.date %></div>
+              <div class="col-md-2 col-sm-4"><%= meetup.extract_time %></div>
+            </div>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-<% end %>
 </div>

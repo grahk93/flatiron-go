@@ -1,15 +1,21 @@
-<%= form_for @location do |f| %>
-  <% if @location.errors.any? %>
-    <h3>Errors:</h3>
-      <% @location.errors.keys.each { |attr| @location.errors[attr].delete_at(1) } %> 
-        <ul>
-        <% @location.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li><br>
-        <% end %>
-        </ul>
-  <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="well location">
+        <h2> New Location </h2> <br/>
+          <%= form_for @location do |f| %>
+            <% if @location.errors.any? %>
+              <h3>Errors:</h3>
+                <% @location.errors.keys.each { |attr| @location.errors[attr].delete_at(1) } %>
+                  <% @location.errors.full_messages.each do |msg| %>
+                    <%= msg %><br/>
+                  <% end %>
+            <% end %>
 
-  <%= f.label :name %>
-  <%= f.text_field :name %><br>
-  <%= f.submit "Create Location" %>
-<% end %>
+            <%= f.text_field :name, :class => 'form-control', :placeholder => 'Location Name' %><br>
+            <%= f.submit "Create Location", class: "btn btn-secondary btn-sm scroll"  %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>

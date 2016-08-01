@@ -5,11 +5,11 @@
       <div class="well profile">
         <h2><%= @user.user_name %></h2>
         <br/>
-        <p>Email: <%= @user.email %></p> 
-        <p>Name: <%= @user.name %></p> 
-        <p>Cohort: <%= link_to @user.cohort.name, cohort_path(@user.cohort_id) %></p> 
-        <p>Bio: <%= @user.bio %></p> 
-        
+        <p>Email: <%= @user.email %></p>
+        <p>Name: <%= @user.name %></p>
+        <p>Cohort: <%= link_to @user.cohort.name, cohort_path(@user.cohort_id) %></p>
+        <p>Bio: <%= @user.bio %></p>
+
         <br/>
         <%= button_to 'Edit Info', edit_profile_path, method: 'get', class: "btn btn-secondary btn-sm scroll" %>
         <br/>
@@ -35,12 +35,12 @@
       <div class="row">
         <div class="col-md-12">
           <div class="well">
-            <h3>Meetups you are hosting: </h3> 
+            <h3>Meetups you are hosting: </h3>
             <ul>
               <% @user.meetups.each do |meetup| %>
-                <li><%= link_to meetup.title, meetup_path(meetup), class: "link-ellipsis" %></li>
+                <li><%= link_to meetup.title, meetup_path(meetup), class: "link-ellipsis-long" %></li>
               <% end %>
-            </ul> 
+            </ul>
             <br/>
             <%= button_to 'Create New Meetup', new_meetup_path, method: 'get', class: "btn btn-secondary btn-sm scroll" %>
             <br/>
@@ -63,7 +63,7 @@
         <div class="col-md-12">
           <div class="well">
             <h3>Meetups you are attending: </h3>
-            <ul> 
+            <ul>
             <% @user.meetups_to_attend.each do |meetup| %>
             <li><%= link_to meetup.title, meetup_path(meetup), class: "link-ellipsis" %></li>
             <%end%>
@@ -74,7 +74,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="well">
-            <h3>Meetups you have attended: </h3> 
+            <h3>Meetups you have attended: </h3>
             <ul>
               <% @user.meetups_attended.each do |meetup| %>
               <li><%= link_to meetup.title, meetup_path(meetup), class: "link-ellipsis" %></li>
@@ -85,4 +85,4 @@
       </div>
     </div> <!-- end right column -->
   </div>
-</div> <!-- container -->  
+</div> <!-- container -->

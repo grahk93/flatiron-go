@@ -1,22 +1,38 @@
-<%= flash[:join] %>
-<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="well meetup">
+        <h4><%= flash[:join] %></h4>
 
-
-Title: <%= @meetup.title %> <br>
-Date: <%= @meetup.date %> <br>
-Time: <%= @meetup.extract_time %> <br>
-Host: <%= @meetup.host.user.user_name %> <br>
-Attendants: <% @meetup.attendants.each do |attendant| %>
-   <%= attendant.user.user_name %><%= ',' if attendant != @meetup.attendants.last %>
-<%end%>
-<br>
-Description: <%= @meetup.description %>
-
-
-<%= button_to 'Join Meetup', join_meetup_path, method: 'post' %>
-<% if @meetup.is_host?(current_user) %>
-  <%= button_to 'Edit Meetup', edit_meetup_path, method: 'get' %>
-  <%= button_to 'Invite Users', invite_path, method: 'get' %>
-<% end %>
-<!-- When join meetup button is clicked, 
-the meetup currently shown must be associated with the current user  -->
+        <h3><%= @meetup.title %> </h3> <br/>
+        <h4>Date: <%= @meetup.date %></h4> <br/>
+        <h4>Time: <%= @meetup.extract_time %></h4> <br>
+        <h4>Host:
+          <% if @meetup.host.user.id == session[:user_id] %>
+            <%= link_to @meetup.host.user.user_name, profile_path(@meetup.host.user)%>
+          <% else %>
+            <%= link_to @meetup.host.user.user_name, user_path(@meetup.host.user)%>
+          <% end %>
+        </h4> <br/>
+        <h4>Attendants:</h4>
+          <p>
+          <% @meetup.attendants.each do |attendant| %>
+            <% if attendant.user.id == session[:user_id] %>
+              <%= link_to attendant.user.user_name, profile_path(attendant.user) %><%= ',' if attendant != @meetup.attendants.last %>
+            <% else %>
+              <%= link_to attendant.user.user_name, user_path(attendant.user) %><%= ',' if attendant != @meetup.attendants.last %>
+            <%end%>
+          <%end%>
+          </p>
+        <br/>
+        <h4>Description:</h4> <p><%= @meetup.description %></p>
+        <br/>
+        <%= button_to 'Join Meetup', join_meetup_path, method: 'post', class: "btn btn-secondary btn-sm scroll" %>
+        <% if @meetup.is_host?(current_user) %>
+          <%= button_to 'Edit Meetup', edit_meetup_path, method: 'get', class: "btn btn-secondary btn-sm scroll" %>
+          <%= button_to 'Invite Users', invite_path, method: 'get', class: "btn btn-secondary btn-sm scroll" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

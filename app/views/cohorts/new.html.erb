@@ -1,16 +1,20 @@
-<%= form_for @cohort do |f| %>
-  
-  <% if @cohort.errors.any? %>
-    <h3>Errors:</h3>
-      <% @cohort.errors.keys.each { |attr| @cohort.errors[attr].delete_at(1) } %> 
-        <ul>
-        <% @cohort.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li><br>
-        <% end %>
-        </ul>
-  <% end %>
-
-  <%= f.label :name %>
-  <%= f.text_field :name %><br>
-  <%= f.submit "Create Cohort" %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="well cohort">
+        <h2> New Cohort </h2> <br/>
+          <%= form_for @cohort do |f| %>
+            <% if @cohort.errors.any? %>
+              <h3>Errors:</h3>
+                <% @cohort.errors.keys.each { |attr| @cohort.errors[attr].delete_at(1) } %>
+                  <% @cohort.errors.full_messages.each do |msg| %>
+                    <%= msg %><br/>
+                  <% end %>
+            <% end %>
+            <%= f.text_field :name, :class => 'form-control', :placeholder => 'Cohort Name' %><br>
+            <%= f.submit "Create Cohort", class: "btn btn-secondary btn-sm scroll"%>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>
