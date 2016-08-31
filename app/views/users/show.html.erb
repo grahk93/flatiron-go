@@ -18,10 +18,10 @@ Bio: <%= @user.bio %> <br>
 </div><br>
 <div class="row">
 <%if @user.meetups_to_attend.length > 0 %>
-<h5> <%= "Meetups #{@user.user_name} is attending:" %> </h5> 
-  <% @user.meetups_to_attend.each do |meetup| %>
-    <ul><%= link_to meetup.title, meetup_path(meetup) %></ul>
-  <%end%>
+  <h5> <%= "Meetups #{@user.user_name} is attending:" %> </h5> 
+    <% @user.meetups_to_attend.each do |meetup| %>
+      <ul><%= link_to meetup.title, meetup_path(meetup) %></ul>
+    <%end%>
 <% else %>
 <h5> <%= "#{@user.user_name} is not currently attending any meetups" %></h5>
 <% end %>
