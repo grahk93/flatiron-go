@@ -1,30 +1,55 @@
+<div class="container">
 
-<div class="row">
-<h3><%= @user.user_name %></h3>
-Email: <%= @user.email %> <br>
-Name: <%= @user.name %> <br>
-Cohort: <%= link_to @user.cohort.name, cohort_path(@user.cohort_id) %> <br>
-Bio: <%= @user.bio %> <br>
-</div>
-<div class="row">
-<h5> Meetups <%= @user.user_name %> is hosting: </h5> 
-<ul>
-<% @user.meetups.each do |meetup| %>
-  <%= link_to meetup.title, meetup_path(meetup) %><br>
-<%end%>
-</ul> </div><br>
-<div class="row">
-<h5> Meetups <%= @user.user_name %> is attending: </h5>
-<ul> 
-  <% @user.meetups_to_attend.each do |meetup| %>
-    <%= link_to meetup.title, meetup_path(meetup) %><br>
-  <%end%>
-</ul></div><br>
-<div class="row">
-<h5> Meetups <%= @user.user_name %> has attended: </h5> 
-<ul>
-  <% @user.meetups_attended.each do |meetup| %>
-    <%= link_to meetup.title, meetup_path(meetup) %><br>
-  <%end%>
-</ul>
-</div>
+  <div class="row">
+    <div class="col-md-5"> <!-- left column -->
+      <div class="well profile">
+        <h2><%= @user.user_name %></h2>
+        <br/>
+        <p>Email: <%= @user.email %></p>
+        <p>Name: <%= @user.name %></p>
+        <p>Cohort: <%= link_to @user.cohort.name, cohort_path(@user.cohort_id) %></p>
+        <p>Bio: <%= @user.bio %></p>
+      </div>
+    </div> <!-- end left column -->
+
+    <div class="col-md-7"> <!-- right column -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="well">
+            <h3>Meetups <%= @user.user_name %> are hosting: </h3>
+            <ul>
+              <% @user.meetups.each do |meetup| %>
+                <li><%= link_to meetup.title, meetup_path(meetup), class: "link-ellipsis-long" %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="well">
+            <h3>Meetups <%= @user.user_name %> are attending: </h3>
+            <ul>
+            <% @user.meetups_to_attend.each do |meetup| %>
+            <li><%= link_to meetup.title, meetup_path(meetup), class: "link-ellipsis" %></li>
+            <%end%>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="well">
+            <h3>Meetups <%= @user.user_name %> have attended: </h3>
+            <ul>
+              <% @user.meetups_attended.each do |meetup| %>
+              <li><%= link_to meetup.title, meetup_path(meetup), class: "link-ellipsis" %></li>
+              <%end%>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div> <!-- end right column -->
+  </div>
+</div> <!-- container -->

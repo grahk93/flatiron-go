@@ -1,35 +1,60 @@
-<br>
+<div class="container">
+  <div class="well meetup">
 
-<h3> Meetup Dashboard</h3>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <h2> Meetup Dashboard</h2> <br/>
+      </div>
+    </div>
 
-<h5>Today's meetups:</h5>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6">
+        <h3>Today's meetups:</h3> <br/>
 
-<% Meetup.today.each do |meetup|%>
-<ul>
- <%= link_to meetup.title, meetup_path(meetup) %>,
- <%= meetup.date %>,
- <%= meetup.extract_time %>,
- <%= meetup.location.name %>
-</ul>
-<%end%>
+        <% Meetup.today.each do |meetup|%>
+          <ul>
+           <%= link_to meetup.title, meetup_path(meetup) %>,
+           <%= meetup.date %>,
+           <%= meetup.extract_time %>,
+           <%= meetup.location.name %>
+          </ul>
+        <%end%>
+      </div>
 
+      <div class="col-xs-12 col-sm-12 col-md-6">
+        <h3>This Weeks's meetups:</h3> <br/>
+        <% Meetup.this_week.each do |meetup|%>
+          <ul>
+           <%= link_to meetup.title, meetup_path(meetup) %>,
+           <%= meetup.date %>,
+           <%= meetup.extract_time %>,
+           <%= meetup.location.name %>
+          </ul>
+        <%end%>
+      </div>
+    </div>
 
-<br>
-<h5>This Weeks's meetups:</h5>
-<% Meetup.this_week.each do |meetup|%>
-<ul>
- <%= link_to meetup.title, meetup_path(meetup) %>,
- <%= meetup.date %>,
- <%= meetup.extract_time %>,
- <%= meetup.location.name %>
-</ul>
-<%end%>
+  </div> <%# close well meetup %>
 
-<h5>Meetups by cohort:</h5>
-  <%Cohort.all.each do |cohort|%>
-    <h5><%=cohort.name%>:</h5>
-    <% cohort.meetups.each do |meetup| %>
-      <%= link_to meetup.title, meetup_path(meetup) %> <br>
-    <% end %>
-  <% end %>
+  <div class="well meetup">
+      <h2>Meetups by cohort</h2>
+        <%counter=0%>
 
+        <%Cohort.all.each do |cohort|%>
+          <%counter += 1%>
+          <% if counter % 3 == 0 %>
+            <div class="row">
+          <% end %>
+            <div class="col-md-4">
+            <h3><%=cohort.name%>:</h3>
+            <% cohort.meetups.each do |meetup| %>
+              <%= link_to meetup.title, meetup_path(meetup) %> <br>
+            <% end %>
+            </div>
+          <% if counter % 3 == 0 %>
+            </div>
+          <% end %>
+        <% end %>
+  </div>
+
+</div>
